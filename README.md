@@ -2,7 +2,7 @@
 
 Benvenuti in **SAFEDRIVEMONITOR**. Questo progetto mira a migliorare la sicurezza stradale tramite un sistema di monitoraggio del tasso alcolemico dei conducenti, applicabile a tutti i mezzi di trasporto su strada. L’obiettivo è garantire il rispetto delle normative e prevenire incidenti causati da alcol e sostanze stupefacenti.
 
-Attualmente l’applicazione è in fase di sviluppo e questa è una prima versione.
+Attualmente l’applicazione è in fase di sviluppo e questa è una prima versione.L'applicazione è scalabile , attualmente può avere 1 Milione di utentti registrati.
 
 ## Parte del Conducente
 
