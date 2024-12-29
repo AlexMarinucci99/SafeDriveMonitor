@@ -13,7 +13,7 @@ Attualmente l’applicazione è in fase di sviluppo e questa è una prima versio
 **Componenti reali:**
 - Conducente identificato tramite Nome, Cognome e ID univoci.
 - Database individuale con i risultati dei test precedenti.
-- Reset ID Conducente funzionante , attualmente per attuare una verifica , fare richiesta     dell'api key ai collaboratori della repository.
+- Reset ID Conducente funzionante via email (sms implementato ma non funzionate attualmente) , attualmente per attuare una verifica , fare richiesta dell'api key ai collaboratori della repository.
 
 ## Parte Admin
 
