@@ -37,9 +37,9 @@
     <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px;" />
 
     <Button text="Accedi" onAction="#onLogin" styleClass="primary-button"/>
-    <Label text="Non hai un account?" style="-fx-text-fill: blue; -fx-underline: true; -fx-cursor: hand;" onMouseClicked="#onRegister"/>
+    <Label text="Non hai un account?" style="-fx-text-fill: white; -fx-underline: true; -fx-cursor: hand;" onMouseClicked="#onRegister"/>
 
 
-    <Label text="Hai dimenticato l'ID?" style="-fx-text-fill: blue; -fx-underline: true; -fx-cursor: hand;"
+    <Label text="Hai dimenticato l'ID?" style="-fx-text-fill: white; -fx-underline: true; -fx-cursor: hand;"
            onMouseClicked="#onResetIdClicked"/>
 </VBox>

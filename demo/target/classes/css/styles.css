@@ -5,6 +5,8 @@
     -fx-text-fill: #ffffff;
     font-family: "Open Sans";
     -fx-font-family: "Open Sans";
+    font-weight: bold;
+    -fx-font-weight: bold;
 }
 
 /* Root del layout Login */

@@ -1,4 +1,4 @@
-package it.safedrivemonitor.controller;
+package it.safedrivemonitor.service;
 
 import com.google.gson.Gson;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -8,7 +8,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -23,8 +22,8 @@ public class EmailService {
         // Carica l'API Key e le altre configurazioni dal file `config.properties`
         try {
             Properties props = new Properties();
-            FileInputStream fis = new FileInputStream("config.properties");
-            props.load(fis);
+            var inputStream = EmailService.class.getClassLoader().getResourceAsStream("config.properties");
+            props.load(inputStream);
             apiKey = props.getProperty("api.key");
             senderEmail = props.getProperty("sender.email");
             senderName = props.getProperty("sender.name");

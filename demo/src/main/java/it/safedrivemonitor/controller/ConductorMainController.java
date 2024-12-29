@@ -43,37 +43,63 @@ public class ConductorMainController {
 
         // Gestione scritte
         if (result.passed) {
-            testResultLabel.setText("TEST SUPERATO");
+            testResultLabel.setText("✅ TEST SUPERATO ✅");
             testResultLabel.getStyleClass().add("test-success-label");
+            testResultLabel.setStyle("-fx-text-fill:rgb(255, 255, 255); -fx-font-size: 28px; " +
+                    "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,100,0,0.3), 10, 0.5, 0.0, 0.0);");
 
-            vehicleStatusLabel.setText("VEICOLO SBLOCCATO");
+            vehicleStatusLabel.setText("🚗 VEICOLO SBLOCCATO 🚗");
             vehicleStatusLabel.getStyleClass().add("vehicle-blocked-label");
+            vehicleStatusLabel.setStyle("-fx-text-fill:rgb(0, 29, 0); -fx-font-size: 28px; " +
+                    "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,100,0,0.3), 10, 0.5, 0.0, 0.0);");
 
             authorityLabel.setText("");
         } else {
 
-            testResultLabel.setText("TEST NON SUPERATO");
-
+            testResultLabel.setText("❌ TEST NON SUPERATO ❌");
             testResultLabel.getStyleClass().add("test-fail-label");
+            testResultLabel.setStyle("-fx-text-fill: rgb(139,0,0); -fx-font-size: 28px; " +
+                    "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(139,0,0,0.3), 10, 0.5, 0.0, 0.0);");
 
-            vehicleStatusLabel.setText("VEICOLO BLOCCATO");
+            vehicleStatusLabel.setText("🔒 VEICOLO BLOCCATO 🔒");
             vehicleStatusLabel.getStyleClass().add("vehicle-blocked-label");
+            vehicleStatusLabel.setStyle("-fx-text-fill: rgb(139,0,0); -fx-font-size: 28px; " +
+                    "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(139,0,0,0.3), 10, 0.5, 0.0, 0.0);");
 
             animatePoliceCar();
-        }
 
+        }
     }
 
     private void animatePoliceCar() {
-        authorityLabel.setText("Notifica alle autorità inviata 🚓");
+        authorityLabel.setText("🚓Notifica alle autorità inviata 🚓");
         authorityLabel.getStyleClass().add("authorities-notification-label");
+        authorityLabel.setStyle("-fx-text-fill: rgb(0, 0, 139); -fx-font-size: 28px; " +
+                "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,139,0.8), 15, 0.7, 0.0, 0.0)," +
+                "glow(rgb(0,0,139), 0.5);");
 
-        // Esempio di animazione (puoi usare Timeline per far "camminare" l'emoji)
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(authorityLabel.translateXProperty(), 0)),
-                new KeyFrame(Duration.seconds(2), new KeyValue(authorityLabel.translateXProperty(), 100)));
-        timeline.setCycleCount(1);
-        timeline.play();
+        // Animazione multipla con effetti combinati
+        Timeline moveTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(authorityLabel.translateXProperty(), -200)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(authorityLabel.translateXProperty(), 200)));
+        moveTimeline.setAutoReverse(true);
+        moveTimeline.setCycleCount(2);
+
+        // Aggiunta animazione di scaling per effetto pulsante
+        Timeline scaleTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(authorityLabel.scaleXProperty(), 1.0),
+                        new KeyValue(authorityLabel.scaleYProperty(), 1.0)),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(authorityLabel.scaleXProperty(), 1.2),
+                        new KeyValue(authorityLabel.scaleYProperty(), 1.2)));
+        scaleTimeline.setAutoReverse(true);
+        scaleTimeline.setCycleCount(4);
+
+        // Esegui entrambe le animazioni
+        moveTimeline.setOnFinished(event -> authorityLabel.setTranslateX(0));
+        moveTimeline.play();
+        scaleTimeline.play();
     }
 
     @FXML

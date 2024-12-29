@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 
 
 <VBox xmlns="http://javafx.com/javafx/20"
@@ -29,6 +31,15 @@
     <Label text="Email:"/>
     <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
 
-    <Button text="Invia Email per Reset" onAction="#onSendResetEmail" styleClass="primary-button"/>
+    <Label text="Numero di Telefono:"/>
+    <TextField fx:id="phoneField" promptText="Numero di Telefono" styleClass="small-textfield"/>
+
+    <Label text="Ricevi il nuovo ID tramite:"/>
+    <HBox spacing="10" alignment="CENTER">
+        <RadioButton fx:id="emailOption" text="Email" selected="true" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+        <RadioButton fx:id="smsOption" text="SMS" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <Button text="Invia Reset ID" onAction="#onSendReset" styleClass="primary-button"/>
 </VBox>
 

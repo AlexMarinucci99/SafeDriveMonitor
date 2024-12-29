@@ -105,7 +105,7 @@ public class ConductorLoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reset_id.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1000, 600);
             stage.setScene(scene);
             stage.setTitle("Reset ID Conducente");
             stage.show();

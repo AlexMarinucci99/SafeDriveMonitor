@@ -4,6 +4,7 @@ import it.safedrivemonitor.model.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -23,6 +24,7 @@ public class App extends Application {
 
         Scene scene = new Scene(loader.load(), 1000, 600);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         primaryStage.setTitle("SafeDriveMonitor-Home");
         primaryStage.show();
 

@@ -59,14 +59,25 @@ public class DatabaseManager {
     }
 
     private void createDriversTable(Connection conn) {
-        String sqlDrivers = """
+        String createTableSQL = """
                 CREATE TABLE IF NOT EXISTS drivers (
                     driver_id TEXT PRIMARY KEY,
                     driver_name TEXT UNIQUE NOT NULL,
-                     email TEXT UNIQUE NOT NULL
+                    email TEXT UNIQUE NOT NULL,
+                    phone TEXT
                 );
                 """;
-        executeSQL(conn, sqlDrivers);
+
+        String addColumnSQL = "ALTER TABLE drivers ADD COLUMN phone TEXT;";
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(createTableSQL); // Crea la tabella se non esiste
+            stmt.execute(addColumnSQL); // Aggiunge la colonna se non esiste (non ha effetti collaterali se già esiste)
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("duplicate column name: phone")) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void executeSQL(Connection conn, String sql) {
