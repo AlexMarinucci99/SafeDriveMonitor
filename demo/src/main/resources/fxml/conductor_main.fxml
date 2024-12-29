@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.ConductorMainController"
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@../css/styles.css"
+      styleClass="conductor-root"
+      style="-fx-background-image: url('/images/test.jpg'); -fx-background-size: cover;">
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Indietro" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
+    <Label text="Conducente: Esegui il test" styleClass="title-label"/>
+
+    <Button text="Esegui Test" onAction="#onExecuteTest" styleClass="primary-button" fx:id="executeTestButton"/>
+    <Button text="I miei risultati" onAction="#onViewMyResults" styleClass="secondary-button"/>
+
+    <Label fx:id="testResultLabel" text=""/>
+    <Label fx:id="vehicleStatusLabel" text=""/>
+    <Label fx:id="authorityLabel" text="" style="-fx-font-size:12px; -fx-text-fill:red;"/>
+</VBox>

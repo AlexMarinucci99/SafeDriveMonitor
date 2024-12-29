@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="20" alignment="CENTER"
+      xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.AdminLoginController"
+      stylesheets="@../css/styles.css"
+      style="-fx-background-image: url('/images/idk.jpg'); -fx-background-size: cover;">
+
+ <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
+
+    <Label text="Login Admin" styleClass="title-label"/>
+    <TextField fx:id="usernameField" promptText="Username" styleClass="small-textfield"/>
+    <PasswordField fx:id="passwordField" promptText="Password" styleClass="small-textfield"/>
+    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px;" />
+    <Button text="Accedi" onAction="#onLogin" styleClass="primary-button"/>
+</VBox>

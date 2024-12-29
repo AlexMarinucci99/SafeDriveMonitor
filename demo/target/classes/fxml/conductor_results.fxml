@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.ConductorResultsController"
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@../css/styles.css"
+      styleClass="login-root">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <TableView fx:id="resultsTable" prefWidth="400" prefHeight="300">
+        <columns>
+            <TableColumn text="Alcol" fx:id="alcoholCol"/>
+            <TableColumn text="THC" fx:id="thcCol"/>
+            <TableColumn text="Cocaina" fx:id="cocaineCol"/>
+            <TableColumn text="MDMA" fx:id="mdmaCol"/>
+            <TableColumn text="Risultato" fx:id="resultCol"/>
+            <TableColumn text="Data e ora" fx:id="timestampCol"/>
+        </columns>
+    </TableView>
+</VBox>

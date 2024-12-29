@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.ResetIdController"
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@../css/styles.css"
+      styleClass="login-root"
+      style="-fx-background-image: url('/images/id.jpg'); -fx-background-size: cover;">
+
+    <Label text="Reset ID Conducente" styleClass="title-label"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Indietro" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
+    <Label text="Nome e Cognome:"/>
+    <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
+
+    <Label text="Email:"/>
+    <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
+
+    <Button text="Invia Email per Reset" onAction="#onSendResetEmail" styleClass="primary-button"/>
+</VBox>
+
