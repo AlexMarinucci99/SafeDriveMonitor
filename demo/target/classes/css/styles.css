@@ -1,0 +1,111 @@
+/* Stile di base per tutti i Label */
+.label {
+    font-size: 14px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff;
+    font-family: "Open Sans";
+    -fx-font-family: "Open Sans";
+    font-weight: bold;
+    -fx-font-weight: bold;
+}
+
+/* Root del layout Login */
+.login-root {
+    background-color: #edf0ee;
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #edf0ee);
+    padding: 30px;
+    -fx-padding: 30px;
+}
+
+/* Title label style */
+.title-label {
+    font-size: 36px;
+    -fx-font-size: 36px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+    font-style: italic;
+    -fx-font-style: italic;
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+}
+
+/* Bottoni primari */
+.primary-button {
+    -fx-background-color: #007BFF;
+    background-color: #007BFF;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+.primary-button:hover {
+    -fx-background-color: #0056b3;
+    background-color: #0056b3;
+}
+
+/* Bottoni secondari */
+.secondary-button {
+    -fx-background-color: #0c8d00;
+    background-color: #0c8d00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-pref-width: 160;
+    -fx-pref-height: 40;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+.secondary-button:hover {
+    -fx-background-color: #00be29;
+    background-color: #00be29;
+}
+
+/* Bottoni "Indietro" uniformi */
+.back-button {
+    -fx-background-color: #07e938;
+    background-color: #22ff3f;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    font-size: 16px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 10;
+    padding: 10px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+.back-button:hover {
+    -fx-background-color: #00aa0e;
+    background-color: #0d9b00;
+}
+
+/* Tabelle (log e risultati) */
+.table-view .column-header, .table-view .table-cell {
+    -fx-text-fill: black; /* Colore testo nero */
+    -fx-font-size: 14px;
+    font-size: 14px;
+}
+.table-view .table-cell {
+    -fx-background-color: #00909b; /* Sfondo leggero */
+    background-color: #05b0ff; /* Sfondo leggero */
+}
+.table-view .column-header {
+    -fx-background-color: #d9d9d9; /* Sfondo delle intestazioni */
+    background-color: #d9d9d9; /* Sfondo delle intestazioni */
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+.small-textfield {
+    --fx-pref-width: 200;
+    max-width: 400px;
+    -fx-max-width: 400;
+}
+

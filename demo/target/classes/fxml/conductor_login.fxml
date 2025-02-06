@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.ConductorLoginController"
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@../css/styles.css"
+      styleClass="login-root"
+      style="-fx-background-image: url('/images/tree.jpg'); -fx-background-size: cover;">
+
+
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+      <!-- HBox in alto per pulsante Indietro -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
+    <Label text="Login Conducente" styleClass="title-label"/>
+
+   
+    <TextField fx:id="driverNameField" promptText="Nome e cognome Conducente" styleClass="small-textfield"/>
+
+    
+    <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
+    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px;" />
+
+    <Button text="Accedi" onAction="#onLogin" styleClass="primary-button"/>
+    <Button text="Non hai un account?" onAction="#onRegister" style="-fx-text-fill: white;" />
+
+    <Label text="Hai dimenticato l'ID?" style="-fx-text-fill: white; -fx-underline: true; -fx-cursor: hand;"
+           onMouseClicked="#onResetIdClicked"/>
+</VBox>

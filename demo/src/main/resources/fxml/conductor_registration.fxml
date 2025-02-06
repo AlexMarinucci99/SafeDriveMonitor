@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+
+<VBox spacing="20" alignment="CENTER"
+      xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.ConductorRegistrationController"
+      stylesheets="@../css/styles.css"
+      style="-fx-background-image: url('/images/reg.jpg'); -fx-background-size: cover;">
+
+    <Label text="Registrazione Conducente" styleClass="title-label"/>
+
+    <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
+    <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
+    <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
+    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;"/>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Registra" onAction="#onRegister" styleClass="primary-button"/>
+        <Button text="Indietro" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+</VBox>
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<VBox xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.AdminController"
+      alignment="CENTER"
+      spacing="20"
+      stylesheets="@../css/styles.css"
+      styleClass="login-root">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- HBox in alto per pulsante Indietro -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
+    <!-- Titolo -->
+    <Label text="Area Amministratore" styleClass="title-label"/>
+
+    <!-- Pulsante per caricare/aggiornare la lista dei test -->
+    <Button text="Visualizza Log" onAction="#onViewLog" styleClass="primary-button"/>
+
+    <!-- Tabella con i risultati dei test dal DB -->
+    <TableView fx:id="tableView" prefHeight="300" prefWidth="600">
+        <columns>
+            <TableColumn text="ID" fx:id="idCol"/>
+            <TableColumn text="Driver ID" fx:id="driverIdCol"/>
+            <TableColumn text="Alcol" fx:id="alcoholCol"/>
+            <TableColumn text="THC" fx:id="thcCol"/>
+            <TableColumn text="Cocaina" fx:id="cocaineCol"/>
+            <TableColumn text="MDMA" fx:id="mdmaCol"/>
+            <TableColumn text="Risultato" fx:id="resultCol"/>
+            <TableColumn text="Data e ora" fx:id="timestampCol"/>
+        </columns>
+    </TableView>
+</VBox>

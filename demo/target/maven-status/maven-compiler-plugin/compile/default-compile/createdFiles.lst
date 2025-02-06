@@ -1,0 +1,17 @@
+it\safedrivemonitor\model\MonitoringController.class
+it\safedrivemonitor\controller\AdminController.class
+it\safedrivemonitor\controller\LoginController.class
+it\safedrivemonitor\controller\DeviceDetectionController.class
+it\safedrivemonitor\controller\AdminLoginController.class
+it\safedrivemonitor\controller\ConductorController.class
+it\safedrivemonitor\controller\ConductorMainController.class
+it\safedrivemonitor\Runners\MainApp.class
+it\safedrivemonitor\model\MonitoringController$TestResult.class
+it\safedrivemonitor\controller\ConductorResultsController.class
+it\safedrivemonitor\controller\ResetIdController.class
+it\safedrivemonitor\controller\LogController.class
+it\safedrivemonitor\model\DatabaseManager.class
+it\safedrivemonitor\controller\ConductorLoginController.class
+it\safedrivemonitor\controller\ConductorSession.class
+it\safedrivemonitor\model\Reading.class
+it\safedrivemonitor\Runners\App.class

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Pos?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.safedrivemonitor.controller.LoginController"
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@../css/styles.css"
+      styleClass="login-root"
+      style="-fx-background-image: url('/images/neve.jpg'); -fx-background-size: cover;">
+
+    <!-- Imposta un padding intorno al VBox -->
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+
+
+    <!-- Titolo in alto -->
+    <Label fx:id="titleLabel" 
+           text="Benvenuto in SAFEDRIVEMONITOR"
+           styleClass="title-label"
+    />
+
+    <!-- HBox che contiene i due bottoni sulla stessa riga -->
+    <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="onConductorAccess"
+                text="Login Conducente"
+                onAction="#onConductorAccess"
+                styleClass="primary-button"/>
+
+        <Button fx:id="onAdminAccess"
+                text="Login Amministratore"
+                onAction="#onAdminAccess"
+                styleClass="secondary-button"/>
+    </HBox>
+
+</VBox>
