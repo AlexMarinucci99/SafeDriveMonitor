@@ -17,7 +17,7 @@
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
 
-    <TableView fx:id="resultsTable" prefWidth="1000" prefHeight="1000">
+    <TableView fx:id="resultsTable" prefWidth="1000" prefHeight="600">
         <columns>
             <TableColumn text="Alcol" fx:id="alcoholCol"/>
             <TableColumn text="THC" fx:id="thcCol"/>

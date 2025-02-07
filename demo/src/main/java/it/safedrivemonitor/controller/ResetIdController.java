@@ -18,6 +18,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class ResetIdController {
 
+    // Componenti della UI definite nel file FXML
     @FXML
     private TextField emailField;
     @FXML
@@ -29,38 +30,50 @@ public class ResetIdController {
     @FXML
     private RadioButton smsOption;
 
+    // Servizi per invio email e sms
     private final EmailService emailService = new EmailService();
     private final SmsService smsService = new SmsService();
 
+    // Metodo di inizializzazione, viene chiamato all'avvio del controller
     @FXML
     private void initialize() {
-        // Aggiunge il toggle group per i radio button
+        // Imposta il ToggleGroup per permettere la selezione esclusiva dei RadioButton
         ToggleGroup toggleGroup = new ToggleGroup();
         emailOption.setToggleGroup(toggleGroup);
         smsOption.setToggleGroup(toggleGroup);
     }
 
+    // Metodo invocato alla pressione del pulsante di invio per resettare l'ID del conducente
     @FXML
     private void onSendReset() {
+        // Ottiene i valori inseriti dall'utente e rimuove eventuali spazi
         String name = driverNameField.getText().trim();
         String email = emailField.getText().trim();
         String phone = phoneField.getText().trim();
 
+        // Verifica che il nome e almeno un contatto siano stati inseriti
         if (name.isEmpty() || (email.isEmpty() && phone.isEmpty())) {
             System.out.println("Inserisci Nome e Cognome e almeno un contatto (Email o Telefono)!");
             return;
         }
 
+        // Genera un nuovo ID casuale per il conducente
         String newId = generateNewId();
 
+        // Resetta l'ID del conducente sul database e procede con l'invio tramite email o sms
         if (resetDriverId(name, email, phone, newId)) {
+            // Se l'opzione email è selezionata e il campo email non è vuoto
             if (emailOption.isSelected() && !email.isEmpty()) {
                 System.out.println("Invio ID via Email...");
                 sendEmail(email, newId);
-            } else if (smsOption.isSelected() && !phone.isEmpty()) {
+            } 
+            // Se l'opzione sms è selezionata e il campo telefono non è vuoto
+            else if (smsOption.isSelected() && !phone.isEmpty()) {
                 System.out.println("Invio ID via SMS...");
                 sendSms(phone, newId);
-            } else {
+            } 
+            // Se nessuna opzione valida è stata scelta o il relativo campo è vuoto
+            else {
                 System.out.println("Seleziona un'opzione valida e compila il campo corrispondente.");
             }
         } else {
@@ -68,28 +81,36 @@ public class ResetIdController {
         }
     }
 
+    // Metodo che esegue l'update dell'ID nel database per il conducente specificato
     private boolean resetDriverId(String name, String email, String newId, String phone) {
         String sql = "UPDATE drivers SET driver_id = ? WHERE driver_name = ? AND (email = ? OR phone = ?)";
         try (Connection conn = new DatabaseManager().getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Imposta i parametri della query
             pstmt.setString(1, newId);
             pstmt.setString(2, name);
             pstmt.setString(3, email);
             pstmt.setString(4, phone);
+            // Esegue l'update e ritorna true se almeno una riga è stata aggiornata
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
+            // Stampa eventuali errori SQL
             e.printStackTrace();
             return false;
         }
     }
 
+    // Metodo per l'invio di SMS contenente il nuovo ID
     private void sendSms(String phoneNumber, String newId) {
+        // Costruisce il messaggio da inviare
         String message = "SafeDriveMonitor: Il tuo nuovo ID conducente è " + newId + ". Conservalo con cura.";
-        smsService.sendSms(phoneNumber, message);// The method sendSMS(String, String) is undefined for the type
-                                                 // SmsServiceJava(67108964)
+        // Utilizza il servizio SMS per inviare il messaggio
+        smsService.sendSms(phoneNumber, message);
     }
 
+    // Metodo per l'invio di email contenente il nuovo ID
     public void sendEmail(String recipient, String newId) {
+        // Definisce oggetto e contenuto dell'email (HTML)
         String subject = "Reset ID Conducente - SafeDriveMonitor";
         String content = "<!DOCTYPE html>"
                 + "<html>"
@@ -201,30 +222,34 @@ public class ResetIdController {
                 + "</body>"
                 + "</html>";
 
+        // Invia l'email utilizzando il servizio dedicato
         emailService.sendEmail(recipient, subject, content);
     }
 
+    // Metodo per generare un nuovo ID casuale a 6 cifre
     private String generateNewId() {
-        return String.valueOf((int) (Math.random() * 900000) + 100000); // Genera un ID casuale di 6 cifre
-        }
+        return String.valueOf((int) (Math.random() * 900000) + 100000);
+    }
 
-        @FXML
-        private void onBack() {
+    // Metodo per tornare indietro e caricare nuovamente la schermata di login
+    @FXML
+    private void onBack() {
         try {
+            // Ottiene il riferimento alla finestra corrente tramite uno dei componenti della UI
             Stage stage = (Stage) emailField.getScene().getWindow();
-
+            // Carica il layout della schermata precedente (login del conducente)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/conductor_login.fxml"));
             Parent root = loader.load();
-
+            // Imposta la nuova scena con le dimensioni della finestra corrente
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
             stage.setFullScreen(true);
             stage.setTitle("SafeDriveMonitor-Home");
-            
+            // Mostra la schermata
             stage.show();
         } catch (IOException e) {
+            // Gestisce eventuali errori di caricamento del file FXML
             e.printStackTrace();
         }
-        }
     }
-
+}
