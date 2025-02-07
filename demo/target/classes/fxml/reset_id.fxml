@@ -9,7 +9,6 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 
-
 <VBox xmlns="http://javafx.com/javafx/20"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.safedrivemonitor.controller.ResetIdController"
@@ -19,27 +18,47 @@
       styleClass="login-root"
       style="-fx-background-image: url('/images/id.jpg'); -fx-background-size: cover;">
 
-    <Label text="Reset ID Conducente" styleClass="title-label"/>
-
+    <!-- Pulsante "Indietro" in alto a sinistra -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Indietro" onAction="#onBack" styleClass="back-button"/>
     </HBox>
 
-    <Label text="Nome e Cognome:"/>
-    <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
+    <!-- Contenitore semitrasparente -->
+    <VBox styleClass="form-container" spacing="15" alignment="CENTER">
 
-    <Label text="Email:"/>
-    <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
+        <Label text="Reset ID Conducente" styleClass="title-label"/>
 
-    <Label text="Numero di Telefono:"/>
-    <TextField fx:id="phoneField" promptText="Numero di Telefono" styleClass="small-textfield"/>
+        <!-- Campo Nome e Cognome -->
+        <Label text="Nome e Cognome:" styleClass="reset-field-label"/>
+        <TextField fx:id="driverNameField" 
+                   promptText="Nome e Cognome" 
+                   styleClass="small-textfield"/>
 
-    <Label text="Ricevi il nuovo ID tramite:"/>
-    <HBox spacing="10" alignment="CENTER">
-        <RadioButton fx:id="emailOption" text="Email" selected="true" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
-        <RadioButton fx:id="smsOption" text="SMS" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
-    </HBox>
+        <!-- Campo Email -->
+        <Label text="Email:" styleClass="reset-field-label"/>
+        <TextField fx:id="emailField" 
+                   promptText="Email" 
+                   styleClass="small-textfield"/>
 
-    <Button text="Invia Reset ID" onAction="#onSendReset" styleClass="primary-button"/>
+        <!-- Campo Numero di Telefono -->
+        <Label text="Numero di Telefono:" styleClass="reset-field-label"/>
+        <TextField fx:id="phoneField" 
+                   promptText="Numero di Telefono" 
+                   styleClass="small-textfield"/>
+
+        <!-- Scelta del metodo per ricevere ID -->
+        <Label text="Ricevi il nuovo ID tramite:" styleClass="reset-field-label"/>
+
+        <HBox spacing="20" alignment="CENTER">
+            <RadioButton fx:id="emailOption" text="Email" selected="true" styleClass="radio-button"/>
+            <RadioButton fx:id="smsOption" text="SMS" styleClass="radio-button"/>
+        </HBox>
+
+        <!-- Pulsante Invio Reset -->
+        <Button text="Invia Reset ID" 
+                onAction="#onSendReset" 
+                styleClass="primary-button"/>
+
+    </VBox>
+
 </VBox>
-

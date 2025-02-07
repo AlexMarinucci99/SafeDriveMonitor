@@ -7,29 +7,35 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-
-<VBox spacing="20" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/20"
+<VBox xmlns="http://javafx.com/javafx/20"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.safedrivemonitor.controller.ConductorRegistrationController"
+      spacing="20"
+      alignment="CENTER"
       stylesheets="@../css/styles.css"
+      styleClass="login-root"
       style="-fx-background-image: url('/images/reg.jpg'); -fx-background-size: cover;">
 
-    <Label text="Registrazione Conducente" styleClass="title-label"/>
-
+    <!-- Pulsante Indietro/Logout in alto a sinistra -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
     </HBox>
 
-    <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
-    <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
-    <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
-    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;"/>
-    
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Registra" onAction="#onRegister" styleClass="primary-button"/>
-        
-    </HBox>
+    <!-- Form container semitrasparente -->
+    <VBox styleClass="form-container" spacing="15" alignment="CENTER">
+
+        <Label text="Registrazione Conducente" styleClass="title-label"/>
+
+        <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
+        <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
+        <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
+
+        <!-- Label per mostrare errori o conferma registrazione -->
+        <Label fx:id="errorLabel" text="" styleClass="error-label"/>
+
+        <!-- Pulsante Registra -->
+        <Button text="Crea un account" onAction="#onRegister" styleClass="primary-button"/>
+
+    </VBox>
+
 </VBox>
-
-

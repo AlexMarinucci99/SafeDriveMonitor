@@ -227,5 +227,43 @@
     -fx-font-weight: bold;
     -fx-wrap-text: true; /* se vuoi che l'errore vada a capo su più righe */
 }
+/* Stile generale del RadioButton */
+.radio-button {
+    -fx-text-fill: #333; 
+    font-size: 14px;      /* colore testo */
+    -fx-font-size: 14px;
+    font-weight: normal;  /* stile testo */
+    -fx-font-weight: normal;
+}
+
+/* Rimuove eventuale sfondo e imposta padding interno del cerchio */
+.radio-button .radio {
+    background-color: 68, 67, 67 ;
+    -fx-background-color: rgb(68, 67, 67); 
+    padding: 0.3em;
+    -fx-padding: 0.3em;        /* spaziatura intorno al cerchio */
+}
+
+/* Cerchietto colorato in stato selezionato */
+.radio-button:selected .radio > .mark {
+    background-color: #007BFF;
+    -fx-background-color: #007BFF; /* colore di “riempimento” */
+    -fx-background-radius: 50%; 
+    padding: 0.2em;   /* per mantenere il cerchio rotondo */
+    -fx-padding: 0.2em;           /* regola lo spessore del cerchio */
+}
+.reset-field-label {
+    -fx-text-fill: #333; 
+    font-size: 14px;    /* colore del testo, scuro su sfondo chiaro */
+    -fx-font-size: 14px; 
+    font-weight: bold ;    /* dimensione carattere */
+    -fx-font-weight: bold;   /* testo in grassetto */
+    
+    /* Se vuoi un piccolo margine in basso */
+    padding: 0 0 5 0;
+    -fx-padding: 0 0 5 0; 
+}
+
+
 
 

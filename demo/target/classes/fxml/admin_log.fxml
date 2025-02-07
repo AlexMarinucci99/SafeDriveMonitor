@@ -1,21 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<VBox spacing="10" xmlns="http://javafx.com/javafx/20"
+<VBox  xmlns="http://javafx.com/javafx/20"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.safedrivemonitor.controller.LogController"
-      style="-fx-background-image: url('/images/idk.jpg'); -fx-background-size: cover;">
-    <TableView fx:id="tableView" prefHeight="300" prefWidth="600">
-        <columns>
-            <TableColumn text="ID" fx:id="idCol"/>
-            <TableColumn text="Driver ID" fx:id="driverIdCol"/>
-            <TableColumn text="Alcool" fx:id="alcoholCol"/>
-            <TableColumn text="THC" fx:id="thcCol"/>
-            <TableColumn text="Cocaina" fx:id="cocaineCol"/>
-            <TableColumn text="MDMA" fx:id="mdmaCol"/>
-            <TableColumn text="Risultato" fx:id="resultCol"/>
-            <TableColumn text="Timestamp" fx:id="timestampCol"/>
-        </columns>
-    </TableView>
+      styleClass="admin-root"
+      alignment="CENTER"
+      spacing="20"
+      stylesheets="@../css/styles.css">
+    <VBox styleClass="table-container">
+        <TableView fx:id="tableView" prefHeight="300" prefWidth="600">
+            <columns>
+                <TableColumn text="ID" fx:id="idCol"/>
+                <TableColumn text="Driver ID" fx:id="driverIdCol"/>
+                <TableColumn text="Alcool" fx:id="alcoholCol"/>
+                <TableColumn text="THC" fx:id="thcCol"/>
+                <TableColumn text="Cocaina" fx:id="cocaineCol"/>
+                <TableColumn text="MDMA" fx:id="mdmaCol"/>
+                <TableColumn text="Risultato" fx:id="resultCol"/>
+                <TableColumn text="Timestamp" fx:id="timestampCol"/>
+            </columns>
+        </TableView>
+    </VBox>
 </VBox>
