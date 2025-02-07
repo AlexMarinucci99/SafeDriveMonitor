@@ -14,7 +14,8 @@
       alignment="CENTER"
       spacing="20"
       stylesheets="@../css/styles.css"
-      styleClass="login-root">
+      styleClass="login-root"
+      style="-fx-background-image: url('/images/f.jpg'); -fx-background-size: cover;">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
@@ -32,7 +33,7 @@
     <Button text="Visualizza Log" onAction="#onViewLog" styleClass="primary-button"/>
 
     <!-- Tabella con i risultati dei test dal DB -->
-    <TableView fx:id="tableView" prefHeight="300" prefWidth="600">
+    <TableView fx:id="tableView" prefHeight="400" >
         <columns>
             <TableColumn text="ID" fx:id="idCol"/>
             <TableColumn text="Driver ID" fx:id="driverIdCol"/>

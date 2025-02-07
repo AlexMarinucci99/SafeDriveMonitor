@@ -6,7 +6,7 @@
       spacing="20"
       stylesheets="@../css/styles.css">
     <VBox styleClass="table-container">
-        <TableView fx:id="tableView" prefHeight="300" prefWidth="600">
+        <TableView fx:id="tableView" prefHeight="300" prefWidth="900">
             <columns>
                 <TableColumn text="ID" fx:id="idCol"/>
                 <TableColumn text="Driver ID" fx:id="driverIdCol"/>

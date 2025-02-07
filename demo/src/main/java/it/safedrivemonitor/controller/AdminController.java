@@ -56,6 +56,15 @@ public class AdminController {
         mdmaCol.setCellValueFactory(new PropertyValueFactory<>("mdmaLevel"));
         resultCol.setCellValueFactory(new PropertyValueFactory<>("result"));
         timestampCol.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
+        tableView.setColumnResizePolicy(param -> {
+            double width = tableView.getWidth();
+            int visibleColumns = tableView.getVisibleLeafColumns().size();
+            double newWidth = width / visibleColumns;
+            for (TableColumn<?, ?> col : tableView.getVisibleLeafColumns()) {
+                col.setPrefWidth(newWidth);
+            }
+            return true;
+        });
     }
 
     /**

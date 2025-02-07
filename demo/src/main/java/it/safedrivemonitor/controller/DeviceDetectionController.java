@@ -1,6 +1,10 @@
 package it.safedrivemonitor.controller;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -23,26 +27,70 @@ public class DeviceDetectionController {
     // Metodo inizializzato automaticamente dopo il caricamento del file FXML
     @FXML
     public void initialize() {
-        // Mostra immediatamente lo spinner e imposta il primo messaggio
         deviceSpinner.setVisible(true);
         deviceStatusLabel.setText("Rilevazione del dispositivo...");
+        
+        // Effetto "pulsante" sullo spinner per dare un senso di attesa
+        ScaleTransition pulse = new ScaleTransition(Duration.seconds(1), deviceSpinner);
+        pulse.setFromX(1.0);
+        pulse.setFromY(1.0);
+        pulse.setToX(1.2);
+        pulse.setToY(1.2);
+        pulse.setCycleCount(ScaleTransition.INDEFINITE);
+        pulse.setAutoReverse(true);
+        pulse.play();
 
-        // Imposta una pausa di 5 secondi
-        PauseTransition p1 = new PauseTransition(Duration.seconds(5));
-        p1.setOnFinished(e -> {
-            // Dopo 5 secondi nasconde lo spinner e aggiorna il messaggio
-            deviceSpinner.setVisible(false);
-            deviceStatusLabel.setText("Dispositivo Collegato");
+        // Pausa iniziale di 5 secondi
+        PauseTransition initialPause = new PauseTransition(Duration.seconds(5));
+        initialPause.setOnFinished(e -> {
+            // Arresta l'effetto pulsante
+            pulse.stop();
+            
+            // Dissolvenza e riduzione in scala dello spinner
+            FadeTransition spinnerFadeOut = new FadeTransition(Duration.seconds(1), deviceSpinner);
+            spinnerFadeOut.setFromValue(1.0);
+            spinnerFadeOut.setToValue(0.0);
+            ScaleTransition spinnerScaleDown = new ScaleTransition(Duration.seconds(1), deviceSpinner);
+            spinnerScaleDown.setFromX(1.2);
+            spinnerScaleDown.setFromY(1.2);
+            spinnerScaleDown.setToX(0.0);
+            spinnerScaleDown.setToY(0.0);
+            ParallelTransition spinnerTransition = new ParallelTransition(spinnerFadeOut, spinnerScaleDown);
+            spinnerTransition.setOnFinished(ev -> deviceSpinner.setVisible(false));
 
-            // Avvia un'altra pausa di 5 secondi
-            PauseTransition p2 = new PauseTransition(Duration.seconds(5));
-            p2.setOnFinished(e2 -> {
-                // Al termine della seconda pausa, passa alla schermata successiva
-                goToConductorMain();
+            // Animazione della label: dissolvenza e scorrimento laterale per aggiornare il messaggio
+            FadeTransition labelFadeOut = new FadeTransition(Duration.seconds(1), deviceStatusLabel);
+            labelFadeOut.setFromValue(1.0);
+            labelFadeOut.setToValue(0.0);
+            TranslateTransition labelSlideLeft = new TranslateTransition(Duration.seconds(1), deviceStatusLabel);
+            labelSlideLeft.setFromX(0);
+            labelSlideLeft.setToX(-50);
+            ParallelTransition labelOutTransition = new ParallelTransition(labelFadeOut, labelSlideLeft);
+            labelOutTransition.setOnFinished(ev -> {
+                deviceStatusLabel.setText("Dispositivo Collegato");
+                // Imposta la posizione fuori schermo a destra per il successivo ingresso
+                deviceStatusLabel.setTranslateX(50);
+                // Animazione per portare la label al centro con effetto dissolvenza
+                FadeTransition labelFadeIn = new FadeTransition(Duration.seconds(1), deviceStatusLabel);
+                labelFadeIn.setFromValue(0.0);
+                labelFadeIn.setToValue(1.0);
+                TranslateTransition labelSlideCenter = new TranslateTransition(Duration.seconds(1), deviceStatusLabel);
+                labelSlideCenter.setFromX(50);
+                labelSlideCenter.setToX(0);
+                ParallelTransition labelInTransition = new ParallelTransition(labelFadeIn, labelSlideCenter);
+                labelInTransition.play();
             });
-            p2.play();
+            
+            // Avvia le animazioni dello spinner e della label contemporaneamente
+            spinnerTransition.play();
+            labelOutTransition.play();
+            
+            // Pausa dopo le animazioni prima di cambiare schermata
+            PauseTransition postTransitionPause = new PauseTransition(Duration.seconds(5));
+            postTransitionPause.setOnFinished(ev -> goToConductorMain());
+            postTransitionPause.play();
         });
-        p1.play();
+        initialPause.play();
     }
 
     // Metodo per il passaggio alla schermata "conductor_main.fxml"
