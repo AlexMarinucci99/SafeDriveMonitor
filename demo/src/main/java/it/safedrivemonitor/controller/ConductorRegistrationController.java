@@ -118,7 +118,7 @@ public class ConductorRegistrationController {
             // Salva le dimensioni attuali della finestra
           
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/conductor_login.fxml"));
             Parent root = loader.load();
 
             // Carica la scena con le dimensioni della finestra corrente

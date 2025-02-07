@@ -213,7 +213,7 @@ public class ResetIdController {
         try {
             Stage stage = (Stage) emailField.getScene().getWindow();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/conductor_login.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
