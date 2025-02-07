@@ -11,24 +11,43 @@
 
 /* Root del layout Login */
 .login-root {
-    background-color: #edf0ee;
-    -fx-background-color: linear-gradient(to bottom, #ffffff, #edf0ee);
     padding: 30px;
     -fx-padding: 30px;
+    background-size: cover;
+    -fx-background-size: cover;
+    background-position: center center;
+    -fx-background-position: center center;
+  /* Overlay scuro semitrasparente */
+    background-color: rgba(0,0,0,0.4);
+    -fx-background-color: rgba(0,0,0,0.4); 
+    background-blend-mode: overlay;
+    -fx-background-blend-mode: overlay;
+}
+.form-container {
+    background-color: 255 255 255 0.85;
+    -fx-background-color: rgba(255, 255, 255, 0.774);
+    -fx-background-radius: 10;
+    padding: 20;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+    /* Ombra leggera */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 0);
 }
 
 /* Title label style */
 .title-label {
-    font-size: 36px;
-    -fx-font-size: 36px;
+    font-size: 30px;
+    -fx-font-size: 30px;
     font-weight: bold;
     -fx-font-weight: bold;
-    font-style: italic;
-    -fx-font-style: italic;
+    font-style: arial;
+    font-family: "Segoe UI", "Helvetica Neue", Arial;
+    -fx-font-style: arial;
     -fx-text-fill: #ffffff;
     padding: 10;
     -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
 
 /* Bottoni primari */
@@ -51,40 +70,43 @@
 
 /* Bottoni secondari */
 .secondary-button {
-    -fx-background-color: #0c8d00;
-    background-color: #0c8d00;
+    background-color: #0066cc;
+    -fx-background-color: #0066cc; /* blu meno saturo */
     -fx-text-fill: white;
-    -fx-font-weight: bold;
+    font-size: 14px;
+    -fx-font-size: 14px;
     font-weight: bold;
-    -fx-pref-width: 160;
-    -fx-pref-height: 40;
-    -fx-background-radius: 8;
-    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 35px;
     cursor: pointer;
+    -fx-cursor: hand;
 }
 .secondary-button:hover {
-    -fx-background-color: #00be29;
-    background-color: #00be29;
+    background-color: #005bb5;
+    -fx-background-color: #005bb5;
 }
 
 /* Bottoni "Indietro" uniformi */
 .back-button {
-    -fx-background-color: #07e938;
-    background-color: #22ff3f;
+    background-color: #6c757d;
+    -fx-background-color: #6c757d;
+    color: white;
     -fx-text-fill: white;
-    -fx-font-size: 16px;
-    font-size: 16px;
-    -fx-font-weight: bold;
+    font-size: 14px;
+    -fx-font-size: 14px;
     font-weight: bold;
+    -fx-font-weight: bold;
     -fx-background-radius: 5px;
-    -fx-padding: 10;
-    padding: 10px;
-    -fx-cursor: hand;
+    -fx-pref-width: 90px;
+    -fx-pref-height: 30px;
     cursor: pointer;
+    -fx-cursor: hand;
 }
 .back-button:hover {
-    -fx-background-color: #00aa0e;
-    background-color: #0d9b00;
+    background-color: #5a6268;
+    -fx-background-color: #5a6268;
 }
 
 /* Tabelle (log e risultati) */
@@ -93,19 +115,117 @@
     -fx-font-size: 14px;
     font-size: 14px;
 }
+.table-container {
+    background-color: 255 255 255 0.85;
+    -fx-background-color: rgba(255,255,255,0.85);
+    -fx-background-radius: 10;
+    padding: 20;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.3, 0, 0);
+}/* TableView di base: rimuovi background “default” */
+.table-view {
+    background-color: transparent;
+    -fx-background-color: transparent; /* rimuove sfondo di default */
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+/* 6) TableView - righe alternate */
+.table-row-cell:odd {
+    background-color: #f8f9fa;
+    -fx-background-color: #f8f9fa;
+}
+.table-row-cell:even {
+    -fx-background-color: #ffffff;
+    background-color: #ffffff;
+}
 .table-view .table-cell {
     -fx-background-color: #00909b; /* Sfondo leggero */
     background-color: #05b0ff; /* Sfondo leggero */
+    -fx-text-fill: #333;
+    font-size: 14px;
+    -fx-font-size: 14px;
+    padding: 8 12;
+    -fx-padding: 8 12;   /* rende le celle più ariose */
+    -fx-alignment: CENTER_LEFT; /* testo leggermente a sinistra */
 }
 .table-view .column-header {
-    -fx-background-color: #d9d9d9; /* Sfondo delle intestazioni */
-    background-color: #d9d9d9; /* Sfondo delle intestazioni */
-    -fx-font-weight: bold;
+    background-color: #0056b3; /* blu scuro o colore a tua scelta */
+    -fx-background-color: #0056b3; /* blu scuro o colore a tua scelta */
+    -fx-text-fill: white;
     font-weight: bold;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;  /* testo centrato nelle intestazioni */
+    padding: 10;
+    -fx-padding: 10;
+    font-size: 14px;
+    -fx-font-size: 14px;
+}
+/* Hover e selezione della riga */
+.table-row-cell:hover {
+    background-color: #e6e6e6; /* leggero highlight */
+    -fx-background-color: #e6e6e6; /* leggero highlight */
+}
+.table-row-cell:selected {
+    background-color: #007BFF; /* colore selezione */
+    -fx-background-color: #007BFF; /* blu brand */
+    -fx-text-fill: white;
 }
 .small-textfield {
-    --fx-pref-width: 200;
+    --fx-pref-width: 250;
     max-width: 400px;
     -fx-max-width: 400;
+    -fx-background-radius: 3;
 }
+.link-button {
+    background-color: transparent;    /* sfondo trasparente */
+    -fx-background-color: transparent;
+    -fx-text-fill: #797878;          /* testo bianco */
+    font-size: 14px;
+    -fx-font-size: 14px;
+    font-weight: normal;             /* se vuoi meno enfasi */
+    -fx-font-weight: normal;
+    cursor: pointer;
+    -fx-cursor: hand;
+    -fx-underline: false;
+    padding: 0;                      /* niente padding extra */
+    -fx-padding: 0;
+    border-color: transparent;       /* nessun bordo */
+    -fx-border-color: transparent;
+    border-width: 0;
+    -fx-border-width: 0;
+}
+
+/* Hover con underline */
+.link-button:hover {
+    background-color: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #007BFF; /* blu, effetto link */
+    font-size: 14px;
+    -fx-font-size: 14px;
+    font-weight: normal;
+    -fx-font-weight: normal;
+    cursor: hand;
+    -fx-cursor: hand;
+    padding: 0;
+    -fx-padding: 0;
+    border-color: transparent;
+    -fx-border-color: transparent;
+    border-width: 0;
+    -fx-border-width: 0;
+    -fx-underline: false;
+}
+
+.link-button:hover {
+    -fx-text-fill: #0056b3;
+    -fx-underline: true;
+}
+.error-label {
+    -fx-text-fill: #ff4444; /* rosso */
+    font-size: 14;
+    -fx-font-size: 14px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true; /* se vuoi che l'errore vada a capo su più righe */
+}
+
 

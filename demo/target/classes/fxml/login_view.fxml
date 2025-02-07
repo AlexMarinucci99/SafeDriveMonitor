@@ -35,10 +35,10 @@
         <Button fx:id="onConductorAccess"
                 text="Login Conducente"
                 onAction="#onConductorAccess"
-                styleClass="primary-button"/>
+                styleClass="secondary-button"/>
 
         <Button fx:id="onAdminAccess"
-                text="Login Amministratore"
+                text="Login Admin"
                 onAction="#onAdminAccess"
                 styleClass="secondary-button"/>
     </HBox>

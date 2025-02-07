@@ -110,7 +110,7 @@ public class ConductorRegistrationController {
         }
     }
 
-   /*  @FXML
+    @FXML
     private void onBack() {
         try {
             Stage stage = (Stage) driverIdField.getScene().getWindow();
@@ -133,6 +133,6 @@ public class ConductorRegistrationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 }

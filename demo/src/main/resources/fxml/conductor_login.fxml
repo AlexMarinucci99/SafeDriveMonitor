@@ -16,25 +16,51 @@
       styleClass="login-root"
       style="-fx-background-image: url('/images/tree.jpg'); -fx-background-size: cover;">
 
-    <!-- Padding e altri elementi -->
+    <!-- Padding esterno -->
     <padding>
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>
 
-    <!-- HBox per pulsante Indietro/Logout -->
+    <!-- Pulsante Indietro/Logout in alto -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
     </HBox>
 
-    <Label text="Login Conducente" styleClass="title-label"/>
+    <!-- FORM (container semitrasparente) -->
+    <VBox styleClass="form-container"
+          spacing="15" 
+          alignment="CENTER">
 
-    <TextField fx:id="driverNameField" promptText="Nome e cognome Conducente" styleClass="small-textfield"/>
+        <Label text="Login Conducente" styleClass="title-label"/>
 
-    <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
+        <!-- Campo Nome e Cognome -->
+        <TextField fx:id="driverNameField" 
+                   promptText="Nome e cognome Conducente" 
+                   styleClass="small-textfield"/>
 
-    <Button text="Accedi" onAction="#onLogin" styleClass="primary-button"/>
-    <Button text="Non hai un account?" onAction="#onRegister" style="-fx-text-fill: white;" />
+        <!-- Campo ID Conducente -->
+        <TextField fx:id="driverIdField" 
+                   promptText="ID Conducente" 
+                   styleClass="small-textfield"/>
 
-    <Label text="Hai dimenticato l'ID?" style="-fx-text-fill: white; -fx-underline: true; -fx-cursor: hand;"
-           onMouseClicked="#onResetIdClicked"/>
+        <!-- Messaggio di errore (inizialmente vuoto) -->
+        <Label fx:id="errorLabel" text="" styleClass="error-label"/>
+
+        <!-- Pulsante Accedi -->
+        <Button text="Accedi" 
+                onAction="#onLogin" 
+                styleClass="primary-button"/>
+
+        <!-- Link secondari -->
+        <HBox alignment="CENTER" spacing="20">
+            <Button text="Non hai un account?"
+                    onAction="#onRegister"
+                    styleClass="link-button"/>
+                    
+            <Button text="Hai dimenticato l'ID?"
+                    onAction="#onResetIdClicked"
+                    styleClass="link-button"/>
+        </HBox>
+    </VBox>
+
 </VBox>

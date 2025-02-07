@@ -11,13 +11,13 @@
       spacing="20"
       alignment="CENTER"
       stylesheets="@../css/styles.css"
-      styleClass="login-root">
+      styleClass="login-root table-container">
 
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
 
-    <TableView fx:id="resultsTable" prefWidth="400" prefHeight="300">
+    <TableView fx:id="resultsTable" prefWidth="600" prefHeight="400">
         <columns>
             <TableColumn text="Alcol" fx:id="alcoholCol"/>
             <TableColumn text="THC" fx:id="thcCol"/>

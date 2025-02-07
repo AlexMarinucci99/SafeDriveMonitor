@@ -17,6 +17,10 @@
 
     <Label text="Registrazione Conducente" styleClass="title-label"/>
 
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
+    </HBox>
+
     <TextField fx:id="driverNameField" promptText="Nome e Cognome" styleClass="small-textfield"/>
     <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
     <TextField fx:id="emailField" promptText="Email" styleClass="small-textfield"/>
