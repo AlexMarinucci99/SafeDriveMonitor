@@ -9,86 +9,62 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.safedrivemonitor.model.DatabaseManager;
 
 public class AdminLoginController {
-    // Campo di testo per l'inserimento del nome utente
+    private static final Logger LOGGER = Logger.getLogger(AdminLoginController.class.getName());
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin";
+
     @FXML
     private TextField usernameField;
-    // Campo per l'inserimento della password (con mascheratura)
+
     @FXML
     private PasswordField passwordField;
 
-    // Etichetta per visualizzare messaggi di errore
     @FXML
     private Label errorLabel;
 
-    // Gestore del database passato tramite il costruttore
     private final DatabaseManager dbManager;
 
-    // Costruttore che inizializza il controller con un'istanza di DatabaseManager
     public AdminLoginController(DatabaseManager dbManager) {
         this.dbManager = dbManager;
     }
 
-    // Metodo invocato quando si clicca sul pulsante di login
     @FXML
     private void onLogin() {
-        // Stampa in console l'istanza di dbManager per eventuali debug
-        System.out.println("Using dbManager: " + dbManager);
-        
-        // Recupera il testo inserito dall'utente nei campi username e password
+        LOGGER.info("Using dbManager: " + dbManager);
         String user = usernameField.getText();
         String pass = passwordField.getText();
 
-        // Verifica se le credenziali sono corrette (in questo caso "admin"/"admin")
-        if ("admin".equals(user) && "admin".equals(pass)) {
-            try {
-                // Carica il file FXML della vista amministratore
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_view.fxml"));
-                Parent adminView = loader.load();
-
-                // Ottiene l'attuale stage (finestra) e imposta il nuovo contenuto
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.getScene().setRoot(adminView);
-                // Configura lo stage: modalità a schermo intero e titolo aggiornato
-                stage.setFullScreen(true);
-                stage.setTitle("Amministratore");
-            } catch (IOException e) {
-                // Gestione delle eccezioni in caso di errori nel caricamento del file FXML
-                e.printStackTrace();
-            }
+        if (ADMIN_USERNAME.equals(user) && ADMIN_PASSWORD.equals(pass)) {
+            navigateToView("/fxml/admin_view.fxml", "Amministratore", true);
         } else {
-            // Visualizza un messaggio di errore se le credenziali non sono corrette
             errorLabel.setText("Credenziali errate. Riprova!");
         }
     }
 
-    // Metodo chiamato quando si decide di tornare alla schermata di login
     @FXML
     private void onBack() {
+        navigateToView("/fxml/login_view.fxml", "SafeDriveMonitor-Home", true);
+    }
+
+    // Metodo ausiliario per gestire la navigazione tra le viste
+    private void navigateToView(String fxmlPath, String title, boolean fullScreen) {
         try {
-            // Ottiene l'attuale stage e memorizza le dimensioni correnti della finestra
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent view = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            double currentW = stage.getWidth();
-            double currentH = stage.getHeight();
-
-            // Carica il file FXML della vista di login
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_view.fxml"));
-            Parent root = loader.load();
-
-            // Crea una nuova scena con la vista appena caricata
-            Scene newScene = new Scene(root);
-            // Aggiorna lo stage con la nuova scena e riapplica le impostazioni precedenti
-            stage.setScene(newScene);
-            stage.setFullScreen(true);
-            stage.setWidth(currentW);
-            stage.setHeight(currentH);
-            stage.setTitle("SafeDriveMonitor-Home");
+            Scene scene = new Scene(view);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setFullScreen(fullScreen);
             stage.show();
         } catch (IOException e) {
-            // Gestione delle eccezioni per errori nel caricamento del file FXML
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore nel caricamento della vista: " + fxmlPath, e);
+            errorLabel.setText("Errore nel caricamento della vista.");
         }
     }
 }

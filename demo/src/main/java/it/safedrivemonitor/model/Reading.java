@@ -1,115 +1,106 @@
 package it.safedrivemonitor.model;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 /**
- * Entità che rappresenta una riga nella tabella readings (o un record generico).
+ * Entità immutabile che rappresenta una riga nella tabella readings (o un record generico).
  */
-public class Reading {
-    // Identificatore univoco della lettura
-    private int id;
-    // Identificatore del driver (autista)
-    private String driverId;
-    // Nome del driver
-    private String driverName;
-    // Livello di alcol rilevato
-    private double alcoholLevel;
-    // Livello di THC rilevato
-    private double thcLevel;
-    // Livello di cocaina rilevato
-    private double cocaineLevel;
-    // Livello di MDMA rilevato
-    private double mdmaLevel;
-    // Risultato dell'analisi (es. "positivo" o "negativo")
-    private String result;
-    // Timestamp della lettura (rappresentato come String)
-    private String timestamp;
+public final class Reading {
 
-    // Restituisce il nome del driver
-    public String getDriverName() {
-        return driverName;
-    }
+    private final int id;
+    private final String driverId;
+    private final String driverName;
+    private final double alcoholLevel;
+    private final double thcLevel;
+    private final double cocaineLevel;
+    private final double mdmaLevel;
+    private final String result;
+    private final LocalDateTime timestamp;
 
-    // Imposta il nome del driver
-    public void setDriverName(String driverName) {
+    public Reading(int id, String driverId, String driverName, double alcoholLevel,
+                   double thcLevel, double cocaineLevel, double mdmaLevel,
+                   String result, LocalDateTime timestamp) {
+        this.id = id;
+        this.driverId = driverId;
         this.driverName = driverName;
+        this.alcoholLevel = alcoholLevel;
+        this.thcLevel = thcLevel;
+        this.cocaineLevel = cocaineLevel;
+        this.mdmaLevel = mdmaLevel;
+        this.result = result;
+        this.timestamp = timestamp;
     }
 
-    // Restituisce l'identificativo univoco della lettura
     public int getId() {
         return id;
     }
 
-    // Imposta l'identificativo univoco della lettura
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // Restituisce l'identificatore del driver
     public String getDriverId() {
         return driverId;
     }
 
-    // Imposta l'identificatore del driver
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
+    public String getDriverName() {
+        return driverName;
     }
 
-    // Restituisce il livello di alcol rilevato
     public double getAlcoholLevel() {
         return alcoholLevel;
     }
 
-    // Imposta il livello di alcol rilevato
-    public void setAlcoholLevel(double alcoholLevel) {
-        this.alcoholLevel = alcoholLevel;
-    }
-
-    // Restituisce il livello di THC rilevato
     public double getThcLevel() {
         return thcLevel;
     }
 
-    // Imposta il livello di THC rilevato
-    public void setThcLevel(double thcLevel) {
-        this.thcLevel = thcLevel;
-    }
-
-    // Restituisce il livello di cocaina rilevato
     public double getCocaineLevel() {
         return cocaineLevel;
     }
 
-    // Imposta il livello di cocaina rilevato
-    public void setCocaineLevel(double cocaineLevel) {
-        this.cocaineLevel = cocaineLevel;
-    }
-
-    // Restituisce il livello di MDMA rilevato
     public double getMdmaLevel() {
         return mdmaLevel;
     }
 
-    // Imposta il livello di MDMA rilevato
-    public void setMdmaLevel(double mdmaLevel) {
-        this.mdmaLevel = mdmaLevel;
-    }
-
-    // Restituisce il risultato dell'analisi
     public String getResult() {
         return result;
     }
 
-    // Imposta il risultato dell'analisi
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    // Restituisce il timestamp della lettura
-    public String getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    // Imposta il timestamp della lettura
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Reading)) return false;
+        Reading reading = (Reading) o;
+        return id == reading.id &&
+                Double.compare(reading.alcoholLevel, alcoholLevel) == 0 &&
+                Double.compare(reading.thcLevel, thcLevel) == 0 &&
+                Double.compare(reading.cocaineLevel, cocaineLevel) == 0 &&
+                Double.compare(reading.mdmaLevel, mdmaLevel) == 0 &&
+                Objects.equals(driverId, reading.driverId) &&
+                Objects.equals(driverName, reading.driverName) &&
+                Objects.equals(result, reading.result) &&
+                Objects.equals(timestamp, reading.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, driverId, driverName, alcoholLevel, thcLevel, cocaineLevel, mdmaLevel, result, timestamp);
+    }
+
+    @Override
+    public String toString() {
+        return "Reading{" +
+                "id=" + id +
+                ", driverId='" + driverId + '\'' +
+                ", driverName='" + driverName + '\'' +
+                ", alcoholLevel=" + alcoholLevel +
+                ", thcLevel=" + thcLevel +
+                ", cocaineLevel=" + cocaineLevel +
+                ", mdmaLevel=" + mdmaLevel +
+                ", result='" + result + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

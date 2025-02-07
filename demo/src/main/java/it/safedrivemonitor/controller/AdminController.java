@@ -77,16 +77,17 @@ public class AdminController {
 
                 // Itera sui record risultanti dalla query e per ogni record crea un oggetto Reading con i dati
                 while (rs.next()) {
-                    Reading r = new Reading();
-                    r.setId(rs.getInt("id"));
-                    r.setDriverName(rs.getString("driver_name"));
-                    r.setDriverId(rs.getString("driver_id"));
-                    r.setAlcoholLevel(rs.getDouble("alcohol_level"));
-                    r.setThcLevel(rs.getDouble("thc_level"));
-                    r.setCocaineLevel(rs.getDouble("cocaine_level"));
-                    r.setMdmaLevel(rs.getDouble("mdma_level"));
-                    r.setResult(rs.getString("result"));
-                    r.setTimestamp(rs.getString("timestamp"));
+                    Reading r = new Reading(
+                        rs.getInt("id"),
+                        rs.getString("driver_id"),
+                        rs.getString("driver_name"),
+                        rs.getDouble("alcohol_level"),
+                        rs.getDouble("thc_level"),
+                        rs.getDouble("cocaine_level"),
+                        rs.getDouble("mdma_level"),
+                        rs.getString("result"),
+                        rs.getTimestamp("timestamp").toLocalDateTime()
+                    );
                     readings.add(r);
                 }
             } catch (SQLException e) {

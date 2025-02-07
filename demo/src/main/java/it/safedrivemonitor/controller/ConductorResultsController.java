@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,13 +80,16 @@ public class ConductorResultsController {
             ResultSet rs = pstmt.executeQuery();
             // Cicla sul result set e crea un oggetto Reading per ogni record
             while (rs.next()) {
-                Reading r = new Reading();
-                r.setAlcoholLevel(rs.getDouble("alcohol_level"));
-                r.setThcLevel(rs.getDouble("thc_level"));
-                r.setCocaineLevel(rs.getDouble("cocaine_level"));
-                r.setMdmaLevel(rs.getDouble("mdma_level"));
-                r.setResult(rs.getString("result"));
-                r.setTimestamp(rs.getString("timestamp"));
+                int id = 0;
+                String driverIdFromDB = ConductorResultsController.this.driverId;
+                String driverName = "";
+                double alcoholLevel = rs.getDouble("alcohol_level");
+                double thcLevel = rs.getDouble("thc_level");
+                double cocaineLevel = rs.getDouble("cocaine_level");
+                double mdmaLevel = rs.getDouble("mdma_level");
+                String result = rs.getString("result");
+                LocalDateTime timestamp = rs.getTimestamp("timestamp").toLocalDateTime();
+                Reading r = new Reading(id, driverIdFromDB, driverName, alcoholLevel, thcLevel, cocaineLevel, mdmaLevel, result, timestamp);
                 readings.add(r);
             }
         } catch (SQLException e) {

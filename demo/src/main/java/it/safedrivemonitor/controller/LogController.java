@@ -2,39 +2,40 @@ package it.safedrivemonitor.controller;
 
 import it.safedrivemonitor.model.DatabaseManager;
 import it.safedrivemonitor.model.Reading;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.application.Platform;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LogController {
 
-    // Riferimenti ai componenti UI definiti nel file FXML
-    
     @FXML
-    private TableView<Reading> tableView; // Tabella per mostrare le letture
+    private TableView<Reading> tableView;
     @FXML
-    private TableColumn<Reading, Number> idCol; // Colonna ID
+    private TableColumn<Reading, Number> idCol;
     @FXML
-    private TableColumn<Reading, String> driverIdCol; // Colonna per l'ID del driver
+    private TableColumn<Reading, String> driverIdCol;
     @FXML
-    private TableColumn<Reading, Number> alcoholCol; // Colonna per il livello di alcol
+    private TableColumn<Reading, Number> alcoholCol;
     @FXML
-    private TableColumn<Reading, Number> thcCol; // Colonna per il livello di THC
+    private TableColumn<Reading, Number> thcCol;
     @FXML
-    private TableColumn<Reading, Number> cocaineCol; // Colonna per il livello di cocaina
+    private TableColumn<Reading, Number> cocaineCol;
     @FXML
-    private TableColumn<Reading, Number> mdmaCol; // Colonna per il livello di MDMA
+    private TableColumn<Reading, Number> mdmaCol;
     @FXML
-    private TableColumn<Reading, String> resultCol; // Colonna per il risultato della lettura
+    private TableColumn<Reading, String> resultCol;
     @FXML
-    private TableColumn<Reading, String> timestampCol; // Colonna per il timestamp della lettura
+    private TableColumn<Reading, String> timestampCol;
 
-    // Istanza del gestore del database
     private final DatabaseManager dbManager = new DatabaseManager();
 
     @FXML
@@ -48,41 +49,57 @@ public class LogController {
         mdmaCol.setCellValueFactory(new PropertyValueFactory<>("mdmaLevel"));
         resultCol.setCellValueFactory(new PropertyValueFactory<>("result"));
         timestampCol.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
-
-        // Carica i dati dalla base di dati
+        
+        // Carica i dati in background
         loadData();
     }
 
-    // Metodo per il caricamento dei dati dal database in un thread separato
     private void loadData() {
-        new Thread(() -> {
-            List<Reading> readings = new ArrayList<>();
-            // Query SQL per selezionare i dati dalla tabella "readings"
-            String sql = "SELECT id, driver_id, alcohol_level, thc_level, cocaine_level, mdma_level, result, timestamp FROM readings";
-            try (Connection conn = dbManager.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(sql);
-                 ResultSet rs = pstmt.executeQuery()) {
+        Task<List<Reading>> loadDataTask = new Task<>() {
+            @Override
+            protected List<Reading> call() throws Exception {
+                List<Reading> readings = new ArrayList<>();
+                String sql = "SELECT id, driver_id, alcohol_level, thc_level, cocaine_level, mdma_level, result, timestamp FROM readings";
+                try (Connection conn = dbManager.getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql);
+                     ResultSet rs = pstmt.executeQuery()) {
 
-                // Cicla sui risultati della query e crea oggetti Reading
-                while (rs.next()) {
-                    Reading r = new Reading();
-                    r.setId(rs.getInt("id"));
-                    r.setDriverId(rs.getString("driver_id"));
-                    r.setAlcoholLevel(rs.getDouble("alcohol_level"));
-                    r.setThcLevel(rs.getDouble("thc_level"));
-                    r.setCocaineLevel(rs.getDouble("cocaine_level"));
-                    r.setMdmaLevel(rs.getDouble("mdma_level"));
-                    r.setResult(rs.getString("result"));
-                    r.setTimestamp(rs.getString("timestamp"));
-                    readings.add(r);
+                    while (rs.next()) {
+                        // Assuming the driver_name column is not available in the query, we pass an empty string.
+                        // Convert the timestamp from String to LocalDateTime.
+                        LocalDateTime timestamp = LocalDateTime.parse(rs.getString("timestamp"));
+                        Reading reading = new Reading(
+                            rs.getInt("id"),
+                            rs.getString("driver_id"),
+                            "",
+                            rs.getDouble("alcohol_level"),
+                            rs.getDouble("thc_level"),
+                            rs.getDouble("cocaine_level"),
+                            rs.getDouble("mdma_level"),
+                            rs.getString("result"),
+                            timestamp
+                        );
+                        readings.add(reading);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw e;
                 }
-            } catch (SQLException e) {
-                // Gestione delle eccezioni SQL: stampa dello stack trace dell'errore
-                e.printStackTrace();
+                return readings;
             }
+        };
 
-            // Aggiorna l'interfaccia utente nel thread JavaFX utilizzando Platform.runLater
-            Platform.runLater(() -> tableView.getItems().setAll(readings));
-        }).start();
+        loadDataTask.setOnSucceeded(event ->
+            // Aggiorna l'interfaccia utente
+            tableView.getItems().setAll(loadDataTask.getValue())
+        );
+
+        loadDataTask.setOnFailed(event -> {
+            // Gestisci l'errore in modo appropriato (ad esempio, mostrando un alert)
+            Throwable error = loadDataTask.getException();
+            error.printStackTrace();
+        });
+
+        new Thread(loadDataTask).start();
     }
 }

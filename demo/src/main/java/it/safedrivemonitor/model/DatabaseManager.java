@@ -4,103 +4,93 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DatabaseManager {
 
+    // Logger per gestire i log
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
+
     // URL del database SQLite
     private static final String DB_URL = "jdbc:sqlite:monitoring.db";
+
+    // Stringhe SQL come costanti
+    private static final String SQL_CREATE_READINGS = """
+            CREATE TABLE IF NOT EXISTS readings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                driver_name TEXT,
+                driver_id TEXT,
+                alcohol_level REAL,
+                thc_level REAL,
+                cocaine_level REAL,
+                mdma_level REAL,
+                result TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            );
+            """;
+
+    private static final String SQL_CREATE_ALERTS = """
+            CREATE TABLE IF NOT EXISTS alerts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                driver_name TEXT,
+                driver_id TEXT,
+                alcohol_level REAL,
+                thc_level REAL,
+                cocaine_level REAL,
+                mdma_level REAL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            );
+            """;
+
+    private static final String SQL_CREATE_DRIVERS = """
+            CREATE TABLE IF NOT EXISTS drivers (
+                driver_id TEXT PRIMARY KEY,
+                driver_name TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                phone TEXT
+            );
+            """;
+
+    private static final String SQL_ADD_PHONE_COLUMN = "ALTER TABLE drivers ADD COLUMN phone TEXT;";
 
     // Metodo per inizializzare il database e creare le tabelle necessarie
     public void initDB() {
         try (Connection conn = DriverManager.getConnection(DB_URL)) {
             if (conn != null) {
-                // Crea la tabella "readings"
-                createReadingsTable(conn);
-
-                // Crea la tabella "alerts"
-                createAlertsTable(conn);
-
-                // Crea la tabella "drivers"
-                createDriversTable(conn);
+                executeSQL(conn, SQL_CREATE_READINGS);
+                executeSQL(conn, SQL_CREATE_ALERTS);
+                createOrUpdateDriversTable(conn);
             }
         } catch (SQLException e) {
-            // Stampa l'errore in caso di eccezione SQL
-            e.printStackTrace();
+            logger.error("Errore durante l'inizializzazione del database", e);
         }
     }
 
-    // Metodo per creare la tabella "readings"
-    private void createReadingsTable(Connection conn) {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS readings (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    driver_name TEXT,
-                    driver_id TEXT,
-                    alcohol_level REAL,
-                    thc_level REAL,
-                    cocaine_level REAL,
-                    mdma_level REAL,
-                    result TEXT,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
-                """;
-        // Esegue la query SQL
-        executeSQL(conn, sql);
-    }
-
-    // Metodo per creare la tabella "alerts"
-    private void createAlertsTable(Connection conn) {
-        String sqlAlerts = """
-                CREATE TABLE IF NOT EXISTS alerts (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    driver_name TEXT,
-                    driver_id TEXT,
-                    alcohol_level REAL,
-                    thc_level REAL,
-                    cocaine_level REAL,
-                    mdma_level REAL,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
-                """;
-        // Esegue la query SQL
-        executeSQL(conn, sqlAlerts);
-    }
-
-    // Metodo per creare la tabella "drivers" e aggiungere eventualmente la colonna "phone"
-    private void createDriversTable(Connection conn) {
-        // Query per creare la tabella "drivers" se non esiste
-        String createTableSQL = """
-                CREATE TABLE IF NOT EXISTS drivers (
-                    driver_id TEXT PRIMARY KEY,
-                    driver_name TEXT UNIQUE NOT NULL,
-                    email TEXT UNIQUE NOT NULL,
-                    phone TEXT
-                );
-                """;
-
-        // Query per aggiungere la colonna "phone"
-        String addColumnSQL = "ALTER TABLE drivers ADD COLUMN phone TEXT;";
-
+    // Crea o aggiorna la tabella drivers
+    private void createOrUpdateDriversTable(Connection conn) {
         try (Statement stmt = conn.createStatement()) {
-            // Crea la tabella "drivers"
-            stmt.execute(createTableSQL);
-            // Prova ad aggiungere la colonna "phone"
-            stmt.execute(addColumnSQL);
-        } catch (SQLException e) {
-            // Se l'errore non è dato dal fatto che la colonna esiste già, stampa l'eccezione
-            if (!e.getMessage().contains("duplicate column name: phone")) {
-                e.printStackTrace();
+            stmt.execute(SQL_CREATE_DRIVERS);
+            try {
+                stmt.execute(SQL_ADD_PHONE_COLUMN);
+            } catch (SQLException e) {
+                if (!e.getMessage().toLowerCase().contains("duplicate column name: phone")) {
+                    throw e;
+                } else {
+                    logger.info("La colonna 'phone' esiste già nella tabella drivers.");
+                }
             }
+        } catch (SQLException ex) {
+            logger.error("Errore nella creazione/aggiornamento della tabella drivers", ex);
         }
     }
 
-    // Metodo ausiliario per eseguire le query SQL passate come parametro
+    // Metodo ausiliario per eseguire una query SQL
     private void executeSQL(Connection conn, String sql) {
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            // Stampa l'errore in caso di eccezione SQL
-            e.printStackTrace();
+            logger.error("Errore durante l'esecuzione della query SQL: {}", sql, e);
         }
     }
 
