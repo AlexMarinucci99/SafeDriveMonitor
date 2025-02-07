@@ -16,25 +16,21 @@
       styleClass="login-root"
       style="-fx-background-image: url('/images/tree.jpg'); -fx-background-size: cover;">
 
-
-
+    <!-- Padding e altri elementi -->
     <padding>
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>
 
-      <!-- HBox in alto per pulsante Indietro -->
+    <!-- HBox per pulsante Indietro/Logout -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
     </HBox>
 
     <Label text="Login Conducente" styleClass="title-label"/>
 
-   
     <TextField fx:id="driverNameField" promptText="Nome e cognome Conducente" styleClass="small-textfield"/>
 
-    
     <TextField fx:id="driverIdField" promptText="ID Conducente" styleClass="small-textfield"/>
-    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px;" />
 
     <Button text="Accedi" onAction="#onLogin" styleClass="primary-button"/>
     <Button text="Non hai un account?" onAction="#onRegister" style="-fx-text-fill: white;" />

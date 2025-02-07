@@ -75,14 +75,14 @@ public class ConductorRegistrationController {
                 PauseTransition pause = new PauseTransition(Duration.seconds(5));
                 pause.setOnFinished(e -> {
                 Stage stage = (Stage) driverIdField.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/conductor_login.fxml"));
                 Parent root;
                 try {
                     root = loader.load();
                     Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
                     stage.setScene(scene);
                     stage.setFullScreen(true);
-                    stage.setTitle("SafeDriveMonitor-Home");
+                    stage.setTitle("SafeDriveMonitor-Login Conducente");
                     stage.show();
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -110,7 +110,7 @@ public class ConductorRegistrationController {
         }
     }
 
-  /*   @FXML
+   /*  @FXML
     private void onBack() {
         try {
             Stage stage = (Stage) driverIdField.getScene().getWindow();

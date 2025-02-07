@@ -141,14 +141,16 @@ public class ConductorLoginController {
     @FXML
     private void onRegister() {
         try {
+            // Carica il file FXML della registrazione
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/conductor_registration.fxml"));
             Parent root = loader.load();
-            // Usa un nodo già esistente per ottenere lo stage (ad es. driverIdField)
+            // Recupera lo stage dalla scena corrente (usa driverIdField come riferimento)
             Stage stage = (Stage) driverIdField.getScene().getWindow();
+            // Crea la nuova scena con le dimensioni dello stage corrente
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
-            stage.setFullScreen(true);
             stage.setTitle("Registrazione Conducente");
+            stage.setFullScreen(true);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -24,7 +24,7 @@
     
     <HBox spacing="10" alignment="CENTER">
         <Button text="Registra" onAction="#onRegister" styleClass="primary-button"/>
-        <Button text="Indietro" onAction="#onBack" styleClass="back-button"/>
+        
     </HBox>
 </VBox>
 
