@@ -3,51 +3,52 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.safedrivemonitor.controller.LoginController"
-      fx:id="rootVBox"
-      styleClass="login-root"
-      spacing="20"
-      alignment="CENTER"
-      stylesheets="@../css/styles.css"
-      style="-fx-background-image: url('/images/home.jpg'); -fx-background-size: cover;">
-
-    <padding>
-        <Insets top="30" right="30" bottom="30" left="30"/>
-    </padding>
-
-    <!-- Contenitore hero semitrasparente -->
-    <VBox styleClass="hero-container" spacing="20" alignment="CENTER">
-
-        <ImageView fx:id="logoImage" fitWidth="120" preserveRatio="true">
-            <image>
-                <Image url="@/images/logo.png" />
-            </image>
-        </ImageView>
-
-        <Label fx:id="titleLabel1" text="Benvenuto in SAFEDRIVEMONITOR"
-               styleClass="title-label1"/>
-        
-        <Label text="La tua sicurezza alla guida è la nostra priorità"
-               styleClass="subtitle-label"/>
-
-        <HBox alignment="CENTER" spacing="20">
-            <Button fx:id="onConductorAccess"
-                    text="Login Conducente"
-                    onAction="#onConductorAccess"
-                    styleClass="primary-button"/>
-            <Button fx:id="onAdminAccess"
-                    text="Login Admin"
-                    onAction="#onAdminAccess"
-                    styleClass="secondary-button"/>
-        </HBox>
-    </VBox>
-
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="it.safedrivemonitor.controller.LoginController"
+            stylesheets="@../css/styles.css"
+            style="-fx-background-image: url('/images/home.jpg'); -fx-background-size: cover;">
     
-    <!-- Aggiunta del footer per il copyright -->
-    <HBox alignment="CENTER">
-        <Label text="© 2025 SafeDriveMonitor. Tutti i diritti riservati" styleClass="copyright-label"/>
-    </HBox>
-
-</VBox>
+    <!-- Contenuto Centrale -->
+    <center>
+        <VBox spacing="20" alignment="CENTER" styleClass="login-root">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+            
+            <!-- Contenitore hero semitrasparente -->
+            <VBox styleClass="hero-container" spacing="20" alignment="CENTER">
+                <ImageView fx:id="logoImage" fitWidth="200" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/logo.png" />
+                    </image>
+                </ImageView>
+        
+                <Label fx:id="titleLabel1" text="Benvenuto in SAFEDRIVEMONITOR"
+                       styleClass="title-label1"/>
+        
+                <Label text="La tua sicurezza alla guida è la nostra priorità"
+                       styleClass="subtitle-label"/>
+        
+                <HBox alignment="CENTER" spacing="20">
+                    <Button fx:id="onConductorAccess"
+                            text="Login Conducente"
+                            onAction="#onConductorAccess"
+                            styleClass="primary-button"/>
+                    <Button fx:id="onAdminAccess"
+                            text="Login Admin"
+                            onAction="#onAdminAccess"
+                            styleClass="secondary-button"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+    
+    <!-- Footer fisso in fondo -->
+    <bottom>
+        <HBox alignment="CENTER">
+            <Label text="© 2025 SafeDriveMonitor. Tutti i diritti sono riservati." styleClass="copyright-label"/>
+        </HBox>
+    </bottom>
+    
+</BorderPane>

@@ -49,37 +49,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.5, 0, 0);
 }
 
-/* Title label style
-.title-label {
-    font-size: 30px;
-    -fx-font-size: 30px;
-    font-weight: bold;
-    -fx-font-weight: bold;
-    font-style: arial;
-    font-family: "Segoe UI", "Helvetica Neue", Arial;
-    -fx-font-style: arial;
-    -fx-text-fill: #ffffff;
-    padding: 10;
-    -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
-}
-
-.title-label1 {
-    font-size: 30px;
-    -fx-font-size: 30px;
-    font-weight: bold;
-    -fx-font-weight: bold;
-    font-family: 'Pacifico', cursive;
-    -fx-font-family: 'Pacifico', cursive;
-    font-style: normal;
-    -fx-font-style: normal;
-    -fx-text-fill: #ffffff;
-    padding: 10;
-    -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
-}
-*/
-
 /* Title label style */
 .title-label {
     font-size: 30px;
@@ -95,8 +64,8 @@
 }
 
 .title-label1 {
-    font-size: 30px;
-    -fx-font-size: 30px;
+    font-size: 50px;
+    -fx-font-size: 50px;
     font-weight: bold;
     -fx-font-weight: bold;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -120,19 +89,34 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
 
-/* Bottoni primari */
-.primary-button {
-    -fx-background-color: #007BFF;
-    background-color: #007BFF;
-    -fx-text-fill: white;
+/* Regole comuni per entrambi i bottoni */
+.primary-button,
+.secondary-button {
+    -fx-pref-width: 200px; /* Larghezza aumentata per contenere il testo */
+    -fx-font-size: 16px;
+    font-size: 16px;
     -fx-font-weight: bold;
     font-weight: bold;
-    -fx-pref-width: 140;
-    -fx-pref-height: 40;
-    -fx-background-radius: 8;
-    -fx-cursor: hand;
-    cursor: pointer;
+    -fx-background-radius: 5;
+    -fx-padding: 12 22;
+    padding: 12 22;
+    -fx-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
+
+.primary-button:hover,
+.secondary-button:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* Bottoni primari */
+.primary-button {
+    background-color: #0078D7;
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #ffffff;
+}
+
 .primary-button:hover {
     -fx-background-color: #0056b3;
     background-color: #0056b3;
@@ -140,22 +124,14 @@
 
 /* Bottoni secondari */
 .secondary-button {
-    background-color: #0066cc;
-    -fx-background-color: #0066cc; /* blu meno saturo */
-    -fx-text-fill: white;
-    font-size: 14px;
-    -fx-font-size: 14px;
-    font-weight: bold;
-    -fx-font-weight: bold;
-    -fx-background-radius: 5px;
-    -fx-pref-width: 150px;
-    -fx-pref-height: 35px;
-    cursor: pointer;
-    -fx-cursor: hand;
+    -fx-background-color: #ff0000;
+    background-color: #ff0000;
+    -fx-text-fill: #ffffff;
 }
+
 .secondary-button:hover {
-    background-color: #005bb5;
-    -fx-background-color: #005bb5;
+    background-color: #cc0000;
+    -fx-background-color: #cc0000;
 }
 
 /* Bottoni "Indietro" uniformi */
@@ -350,16 +326,14 @@
 }
 
 .copyright-label {
-    font-size: 18px;
-    -fx-font-size: 18px;
-    -fx-text-fill: #050505;
+    font-size: 24px;
+    -fx-font-size: 24px;
+    -fx-text-fill: #ffffff;
     opacity: 0.8;
     -fx-opacity: 0.8;
-    padding: 10 0 0 0;  /* Standard property for padding */
-    -fx-padding: 10 0 0 0;  /* Margine superiore per separare il copyright dal resto */
-    font-family: "Nunito", sans-serif;  /* Standard property for font-family */
-    -fx-font-family: "Nunito", sans-serif; /* oppure il font che preferisci */
-    padding: 10;
-    -fx-padding: 10;
+    padding: 10 0 10 0;
+    -fx-padding: 10 0 10 0;
+    font-family: "Nunito", sans-serif;
+    -fx-font-family: "Nunito", sans-serif;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
