@@ -49,7 +49,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.5, 0, 0);
 }
 
-/* Title label style */
+/* Title label style
 .title-label {
     font-size: 30px;
     -fx-font-size: 30px;
@@ -63,6 +63,7 @@
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
+
 .title-label1 {
     font-size: 30px;
     -fx-font-size: 30px;
@@ -77,6 +78,37 @@
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
+*/
+
+/* Title label style */
+.title-label {
+    font-size: 30px;
+    -fx-font-size: 30px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
+}
+
+.title-label1 {
+    font-size: 30px;
+    -fx-font-size: 30px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-style: normal;
+    -fx-font-style: normal;
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
+}
+
 .subtitle-label {
     font-size: 18px;
     -fx-font-size: 18px;
