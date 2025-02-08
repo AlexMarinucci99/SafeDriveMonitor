@@ -63,12 +63,29 @@
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
+.title-label1 {
+    font-size: 30px;
+    -fx-font-size: 30px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+    font-family: 'Pacifico', cursive;
+    -fx-font-family: 'Pacifico', cursive;
+    font-style: normal;
+    -fx-font-style: normal;
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
+}
 .subtitle-label {
     font-size: 18px;
     -fx-font-size: 18px;
-    -fx-text-fill: #f0f0f0;
+    -fx-text-fill: #ffffff;
     font-style: italic;
     -fx-font-style: italic;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
 
 /* Bottoni primari */
@@ -295,6 +312,22 @@
     -fx-font-family: 'Arial', sans-serif;
 
     -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
+}
+
+.copyright-label {
+    font-size: 12px;
+    -fx-font-size: 12px;
+    -fx-text-fill: #050505;
+    opacity: 0.8;
+    -fx-opacity: 0.8;
+    
+    padding: 10 0 0 0;  /* Standard property for padding */
+    -fx-padding: 10 0 0 0;  /* Margine superiore per separare il copyright dal resto */
+    font-family: "Nunito", sans-serif;  /* Standard property for font-family */
+    -fx-font-family: "Nunito", sans-serif; /* oppure il font che preferisci */
     padding: 10;
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);

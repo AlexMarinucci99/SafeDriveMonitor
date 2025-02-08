@@ -26,8 +26,8 @@
             </image>
         </ImageView>
 
-        <Label fx:id="titleLabel" text="Benvenuto in SAFEDRIVEMONITOR"
-               styleClass="title-label"/>
+        <Label fx:id="titleLabel1" text="Benvenuto in SAFEDRIVEMONITOR"
+               styleClass="title-label1"/>
         
         <Label text="La tua sicurezza alla guida è la nostra priorità"
                styleClass="subtitle-label"/>
@@ -43,5 +43,11 @@
                     styleClass="secondary-button"/>
         </HBox>
     </VBox>
+
+    
+    <!-- Aggiunta del footer per il copyright -->
+    <HBox alignment="CENTER">
+        <Label text="© 2025 SafeDriveMonitor. Tutti i diritti riservati" styleClass="copyright-label"/>
+    </HBox>
 
 </VBox>
