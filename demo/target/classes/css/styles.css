@@ -350,12 +350,11 @@
 }
 
 .copyright-label {
-    font-size: 12px;
-    -fx-font-size: 12px;
+    font-size: 18px;
+    -fx-font-size: 18px;
     -fx-text-fill: #050505;
     opacity: 0.8;
     -fx-opacity: 0.8;
-    
     padding: 10 0 0 0;  /* Standard property for padding */
     -fx-padding: 10 0 0 0;  /* Margine superiore per separare il copyright dal resto */
     font-family: "Nunito", sans-serif;  /* Standard property for font-family */
@@ -364,7 +363,3 @@
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
-
-
-
-
