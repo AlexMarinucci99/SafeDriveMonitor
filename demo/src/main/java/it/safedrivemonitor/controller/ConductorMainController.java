@@ -72,7 +72,7 @@ public class ConductorMainController {
             testResultLabel.getStyleClass().add("test-success-label");
             testResultLabel.setStyle(
                 "-fx-text-fill: #00FF00; " +         // Verde brillante
-                "-fx-font-size: 28px; " +
+                "-fx-font-size: 35px; " +
                 "-fx-font-weight: bold; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0.0, 0.0);"
             );
@@ -81,7 +81,7 @@ public class ConductorMainController {
             vehicleStatusLabel.getStyleClass().add("vehicle-success-label");
             vehicleStatusLabel.setStyle(
                 "-fx-text-fill: #00FF00; " +         // Verde brillante
-                "-fx-font-size: 28px; " +
+                "-fx-font-size: 35px; " +
                 "-fx-font-weight: bold; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0.0, 0.0);"
             );
@@ -94,7 +94,7 @@ public class ConductorMainController {
             testResultLabel.getStyleClass().add("test-fail-label");
             testResultLabel.setStyle(
                 "-fx-text-fill: #FF4500; " +         // Rosso arancione acceso
-                "-fx-font-size: 28px; " +
+                "-fx-font-size: 35px; " +
                 "-fx-font-weight: bold; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0.0, 0.0);"
             );
@@ -103,7 +103,7 @@ public class ConductorMainController {
             vehicleStatusLabel.getStyleClass().add("vehicle-fail-label");
             vehicleStatusLabel.setStyle(
                 "-fx-text-fill: #FF4500; " +         // Rosso arancione acceso
-                "-fx-font-size: 28px; " +
+                "-fx-font-size: 35px; " +
                 "-fx-font-weight: bold; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0.0, 0.0);"
             );
@@ -120,9 +120,9 @@ public class ConductorMainController {
      */
     private void animatePoliceCar() {
         // Imposta il testo e lo stile della label per la notifica
-        authorityLabel.setText("🚓 Notifica alle autorità inviata 🚓");
+        authorityLabel.setText("🚓 NOTIFICA ALLE AUTORITÁ INVIATA 🚓");
         authorityLabel.getStyleClass().add("authorities-notification-label");
-        authorityLabel.setStyle("-fx-text-fill: rgb(24, 26, 24); -fx-font-size: 28px; " +
+        authorityLabel.setStyle("-fx-text-fill: rgb(24, 26, 24); -fx-font-size: 50px; " +
                 "-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,139,0,0.8), 15, 0.7, 0.0, 0.0), " +
                 "glow(rgb(0,139,7), 0.5);");
 
