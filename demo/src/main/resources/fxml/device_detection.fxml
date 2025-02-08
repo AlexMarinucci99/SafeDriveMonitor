@@ -18,6 +18,6 @@
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>
 
-    <Label fx:id="deviceStatusLabel" text="" styleClass="title-label"/>
+    <Label fx:id="deviceStatusLabel" text="" styleClass="title-loading"/>
     <ProgressIndicator fx:id="deviceSpinner" visible="false"/>
 </VBox>

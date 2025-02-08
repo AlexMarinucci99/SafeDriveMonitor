@@ -36,7 +36,7 @@
     <Label fx:id="deviceStatusLabel" text="" />
 
     <!-- Pulsante per simulare il rilevamento -->
-    <Button text="Inizia Rilevamento Dispositivo" onAction="#onSimulateDeviceDetection" styleClass="primary-button"/>
+    <Button text="Inizia Rilevamento Dispositivo" onAction="#onSimulateDeviceDetection" styleClass="title-loading"/>
 
     <!-- Una volta collegato, si potrà fare il test -->
     <Button text="Esegui Test" onAction="#onExecuteTest" styleClass="primary-button" fx:id="executeTestButton"/>

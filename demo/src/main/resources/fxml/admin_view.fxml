@@ -15,7 +15,7 @@
       spacing="20"
       stylesheets="@../css/styles.css"
       styleClass="login-root"
-      style="-fx-background-image: url('/images/f.jpg'); -fx-background-size: cover;">
+      style="-fx-background-image: url('/images/home3.jpg'); -fx-background-size: cover;">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>

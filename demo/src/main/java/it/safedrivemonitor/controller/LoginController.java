@@ -1,11 +1,15 @@
 package it.safedrivemonitor.controller;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import java.io.IOException;
+
 import it.safedrivemonitor.model.DatabaseManager;
 
 public class LoginController {
@@ -16,6 +20,21 @@ public class LoginController {
     // Bottone per l'accesso dell'amministratore
     @FXML
     private Button onAdminAccess;
+
+    @FXML
+    private VBox rootVBox;  // Collega l'fx:id="rootVBox" 
+
+   
+
+    @FXML
+    public void initialize() {
+        // Animazione di fade in
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), rootVBox);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
+        ft.setCycleCount(1);
+        ft.play();
+    }
 
     // Metodo chiamato quando si preme il bottone per il login del conducente
     @FXML

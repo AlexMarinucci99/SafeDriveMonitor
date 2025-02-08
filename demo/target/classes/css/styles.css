@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 /* Stile di base per tutti i Label */
 .label {
     font-size: 14px;
@@ -24,7 +27,7 @@
     -fx-background-blend-mode: overlay;
 }
 .form-container {
-    background-color: 255 255 255 0.85;
+    background-color: rgba(255, 255, 255, 0.85);
     -fx-background-color: rgba(255, 255, 255, 0.774);
     -fx-background-radius: 10;
     padding: 20;
@@ -33,6 +36,17 @@
     -fx-spacing: 15;
     /* Ombra leggera */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 0);
+}
+/* Il pannello semitrasparente */
+.hero-container {
+    background-color: rgba(255, 255, 255, 0.85);
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-background-radius: 10;
+    padding: 30px;
+    -fx-padding: 30px;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.5, 0, 0);
 }
 
 /* Title label style */
@@ -48,6 +62,13 @@
     padding: 10;
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
+}
+.subtitle-label {
+    font-size: 18px;
+    -fx-font-size: 18px;
+    -fx-text-fill: #f0f0f0;
+    font-style: italic;
+    -fx-font-style: italic;
 }
 
 /* Bottoni primari */
@@ -238,7 +259,7 @@
 
 /* Rimuove eventuale sfondo e imposta padding interno del cerchio */
 .radio-button .radio {
-    background-color: 68, 67, 67 ;
+    background-color: rgb(68, 67, 67);
     -fx-background-color: rgb(68, 67, 67); 
     padding: 0.3em;
     -fx-padding: 0.3em;        /* spaziatura intorno al cerchio */
@@ -262,6 +283,21 @@
     /* Se vuoi un piccolo margine in basso */
     padding: 0 0 5 0;
     -fx-padding: 0 0 5 0; 
+}
+.title-loading {
+    font-size: 30px;
+    -fx-font-size: 30px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+
+    
+    font-family: 'Arial', sans-serif; /* Modifica qui il font */
+    -fx-font-family: 'Arial', sans-serif;
+
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
 
 

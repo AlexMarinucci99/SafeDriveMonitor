@@ -9,7 +9,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.safedrivemonitor.controller.AdminLoginController"
       stylesheets="@../css/styles.css"
-      style="-fx-background-image: url('/images/idk.jpg'); -fx-background-size: cover;">
+      style="-fx-background-image: url('/images/home1.jpg'); -fx-background-size: cover;">
 
  <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
