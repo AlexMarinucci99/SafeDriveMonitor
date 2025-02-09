@@ -339,3 +339,13 @@
     -fx-font-family: "Nunito", sans-serif;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 8, 0.5, 0, 0);
 }
+
+.stats-label {
+    background-color: #0078D7;
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #ffffff;
+    padding: 10;
+    -fx-padding: 10;
+    min-width: 20;
+    -fx-min-width: 200;
+}

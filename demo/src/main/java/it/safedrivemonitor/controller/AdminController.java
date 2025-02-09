@@ -4,6 +4,7 @@ package it.safedrivemonitor.controller;
 import it.safedrivemonitor.model.DatabaseManager;
 import it.safedrivemonitor.model.Reading;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Label;
 
 public class AdminController {
 
@@ -37,6 +39,8 @@ public class AdminController {
     private TableColumn<Reading, String> resultCol;
     @FXML
     private TableColumn<Reading, String> timestampCol;
+    @FXML
+    private Label statsLabel;
 
     // Istanza del DatabaseManager per la gestione della connessione al database
     private final DatabaseManager dbManager = new DatabaseManager();
@@ -139,6 +143,100 @@ public class AdminController {
             // Stampa l'errore in console se si verifica un'eccezione durante il caricamento dell'FXML
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void onViewStatistics() {
+        Task<String> statsTask = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                StringBuilder statsResult = new StringBuilder();
+                // Soglie definite (stesse usate nel MonitoringController)
+                final double ALCOHOL_THRESHOLD = 0.5;
+                final double THC_THRESHOLD = 15.0;
+                final double COCAINE_THRESHOLD = 10.0;
+                final double MDMA_THRESHOLD = 50.0;
+                
+                int totalUsers = 0;
+                int posAlcohol = 0;
+                int posThc = 0;
+                int posCocaine = 0;
+                int posMdma = 0;
+                
+                try (Connection conn = dbManager.getConnection()) {
+                    // Query per contare tutti gli utenti registrati nella tabella drivers
+                    String countDriversSql = "SELECT COUNT(*) AS total_users FROM drivers";
+                    try (PreparedStatement ps = conn.prepareStatement(countDriversSql);
+                         ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            totalUsers = rs.getInt("total_users");
+                        }
+                    }
+
+                    /* Query che aggrega, dalla tabella readings, i test per ciascun driver.
+                       In questo modo, per ogni driver registrato con almeno un test, 
+                       si calcola il massimo valore rilevato per ogni sostanza. */
+                    String aggregateSql = """
+                        SELECT 
+                               SUM(CASE WHEN alcohol_level > ? THEN 1 ELSE 0 END) as pos_alcohol,
+                               SUM(CASE WHEN thc_level > ? THEN 1 ELSE 0 END) as pos_thc,
+                               SUM(CASE WHEN cocaine_level > ? THEN 1 ELSE 0 END) as pos_cocaine,
+                               SUM(CASE WHEN mdma_level > ? THEN 1 ELSE 0 END) as pos_mdma
+                        FROM (
+                            SELECT driver_id,
+                                   MAX(alcohol_level) as alcohol_level,
+                                   MAX(thc_level) as thc_level,
+                                   MAX(cocaine_level) as cocaine_level,
+                                   MAX(mdma_level) as mdma_level
+                            FROM readings
+                            GROUP BY driver_id
+                        ) sub
+                        """;
+
+                    try (PreparedStatement ps = conn.prepareStatement(aggregateSql)) {
+                        ps.setDouble(1, ALCOHOL_THRESHOLD);
+                        ps.setDouble(2, THC_THRESHOLD);
+                        ps.setDouble(3, COCAINE_THRESHOLD);
+                        ps.setDouble(4, MDMA_THRESHOLD);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                posAlcohol = rs.getInt("pos_alcohol");
+                                posThc = rs.getInt("pos_thc");
+                                posCocaine = rs.getInt("pos_cocaine");
+                                posMdma = rs.getInt("pos_mdma");
+                            }
+                        }
+                    }
+                }
+                
+                // Calcola le percentuali sul totale degli utenti registrati (presi dalla tabella drivers)
+                double percentAlcohol = totalUsers > 0 ? ((double) posAlcohol / totalUsers * 100) : 0;
+                double percentThc = totalUsers > 0 ? ((double) posThc / totalUsers * 100) : 0;
+                double percentCocaine = totalUsers > 0 ? ((double) posCocaine / totalUsers * 100) : 0;
+                double percentMdma = totalUsers > 0 ? ((double) posMdma / totalUsers * 100) : 0;
+
+                statsResult.append("Numero utenti registrati: ").append(totalUsers).append("\n")
+                           .append(String.format("Positivi all'Alcol: %.2f%%\n", percentAlcohol))
+                           .append(String.format("Positivi al THC: %.2f%%\n", percentThc))
+                           .append(String.format("Positivi alla Cocaina: %.2f%%\n", percentCocaine))
+                           .append(String.format("Positivi all'MDMA: %.2f%%", percentMdma));
+
+                return statsResult.toString();
+            }
+        };
+
+        statsTask.setOnSucceeded(event -> {
+            String stats = statsTask.getValue();
+            Platform.runLater(() -> statsLabel.setText(stats));
+        });
+
+        statsTask.setOnFailed(event -> {
+            Throwable error = statsTask.getException();
+            error.printStackTrace();
+        });
+
+        new Thread(statsTask).start();
     }
 
 }

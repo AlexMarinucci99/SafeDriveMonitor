@@ -7,6 +7,7 @@
 <?import javafx.geometry.Pos?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.Pane?>
 
 <VBox xmlns="http://javafx.com/javafx/20"
       xmlns:fx="http://javafx.com/fxml"
@@ -24,6 +25,9 @@
     <!-- HBox in alto per pulsante Indietro -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="← Logout" onAction="#onBack" styleClass="back-button"/>
+        <!-- Spacer per spingere a destra -->
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Label fx:id="statsLabel" text="" styleClass="stats-label"/>
     </HBox>
 
     <!-- Titolo -->
@@ -31,6 +35,8 @@
 
     <!-- Pulsante per caricare/aggiornare la lista dei test -->
     <Button text="Visualizza Log" onAction="#onViewLog" styleClass="primary-button"/>
+     <!-- Pulsante per aggiornare le statistiche -->
+    <Button text="Visualizza Stats" onAction="#onViewStatistics" styleClass="primary-button"/>
 
     <!-- Tabella con i risultati dei test dal DB -->
     <TableView fx:id="tableView" prefHeight="400" >
