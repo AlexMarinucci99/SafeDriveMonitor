@@ -21,7 +21,7 @@ Implementare un sistema avanzato di monitoraggio del tasso alcolemico per miglio
 **Sistema di Gestione Personale:**
 - 👤 Autenticazione unica per ogni conducente.
 - 📊 Archiviazione sicura e organizzata dei test effettuati.
-- 🔄 Sistema di reset ID via email (in fase di revisione, SMS in via di sviluppo).
+- 🔄 Sistema di reset ID via email (funzionante ma attualmente disabilitato, SMS in via di sviluppo).
 
 *Per l'accesso via API key, contattare i responsabili del progetto.*
 
