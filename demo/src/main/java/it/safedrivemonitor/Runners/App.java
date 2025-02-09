@@ -29,6 +29,9 @@ public class App extends Application {
 
         // Crea una nuova scena impostando come root l'albero dei nodi definito nel file FXML
         Scene scene = new Scene(loader.load());
+
+        // Disattiva la scritta "Premere ESC per uscire dallo schermo intero"
+        primaryStage.setFullScreenExitHint("");
         
         // Imposta la scena sullo stage principale (finestra)
         primaryStage.setScene(scene);
