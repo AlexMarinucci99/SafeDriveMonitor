@@ -348,4 +348,8 @@
     -fx-padding: 10;
     min-width: 20;
     -fx-min-width: 200;
+    min-height: 120;
+    -fx-min-height: 120;
+      /* Aumenta la larghezza preferita */
+    
 }
