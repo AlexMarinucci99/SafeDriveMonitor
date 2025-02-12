@@ -23,7 +23,7 @@ Implementare un sistema avanzato di monitoraggio del tasso alcolemico per miglio
 - 📊 Archiviazione sicura e organizzata dei test effettuati.
 - 🔄 Sistema di reset ID via email o SMS(funzionanti ma attualmente disabilitati).
 
-*Per l'accesso via API key, contattare i responsabili del progetto.*
+*Per effettuare un test del rest ID via email, contattare i responsabili del progetto.*
 
 ## 👨‍💼 Pannello Amministratore
 
